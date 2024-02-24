@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "t4-app",
-    "slug": "t4-app",
+    "slug": "t4-app-enhanced",
     "scheme": "t4",
     "version": "1.0.0",
     "orientation": "portrait",

@@ -57,10 +57,12 @@ types/
 **/.wrangler/*
 **/.dev.vars
 .turbo
+wrangler.toml
 
 # Expo
 apps/expo/ios/**
 apps/expo/android/**
+apps/expo/app.json
 
 # Expo Builds
 **/*.apk
@@ -72,3 +74,6 @@ apps/expo/android/**
 **/workbox-*.js
 **/fallback-*.js
 **/service-worker.js
+
+# Jetbrains
+.idea/*
