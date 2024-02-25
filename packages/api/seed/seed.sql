@@ -50,3 +50,22 @@ VALUES
   (48, 'Dacia', 'Sandero', 2020, 'Blue', 12000.00, 18000, 'Gasoline', 'Manual'),
   (49, 'Opel', 'Astra', 2018, 'Gray', 14000.00, 25000, 'Gasoline', 'Manual'),
   (50, 'Suzuki', 'Swift', 2019, 'Red', 16000.00, 22000, 'Gasoline', 'Manual');
+
+INSERT INTO Ups (id, model, year, price, wattage)
+VALUES
+  (1, 'Legrand', 2004, 530, 2000),
+  (2, 'Bragamoro', 2007, 1500, 2300),
+  (3, 'Borri', 2020, 35000, 15000),
+  (4, 'Borri', 2020, 3500, 5043),
+  (5, 'Eaton', 2018, 20000, 10000),
+  (6, 'APC', 2017, 18000, 8000),
+  (7, 'Eaton', 2009, 25000, 1350),
+  (8, 'Eaton', 2008, 20000, 1000),
+  (9, 'APC', 2027, 1800, 800),
+  (10, 'Eaton', 2012, 2000, 100);
+
+INSERT INTO Person (id, name, year)
+VALUES
+  (1, 'Simone', 29),
+  (2, 'Alessandra', 31),
+  (3, 'David', 28);

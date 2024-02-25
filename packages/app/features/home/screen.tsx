@@ -44,6 +44,10 @@ export function HomeScreen() {
     href: '/virtualized-list',
   })
 
+  const upsListLink = useLink({
+    href: '/ups',
+  })
+
   const paramsLink = useLink({
     href: '/params/tim',
   })
@@ -87,6 +91,9 @@ export function HomeScreen() {
         <YStack space='$2'>
           <Button {...virtualizedListLink} space='$2'>
             Virtualized List
+          </Button>
+          <Button {...upsListLink} space='$2'>
+            Ups List
           </Button>
           <Button {...dataFetchingLink} space='$2'>
             Fetching Data
