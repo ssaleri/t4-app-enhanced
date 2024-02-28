@@ -1,3 +1,5 @@
+import { Header } from "../components/Header";
+
 if (typeof requestAnimationFrame === 'undefined') {
   if (typeof setImmediate !== 'undefined') {
     globalThis.requestAnimationFrame = setImmediate
@@ -27,11 +29,13 @@ if (process.env.NODE_ENV === 'production') {
 const title = `${process.env.NEXT_PUBLIC_METADATA_NAME}`
 const description = `${process.env.NEXT_PUBLIC_METADATA_DESCRIPTION}`
 
-const T4App = ({ Component, pageProps }: SolitoAppProps<{ initialSession: Session | null }>) => {
+const T4App = ({Component, pageProps}: SolitoAppProps<{ initialSession: Session | null }>) => {
   return (
     <>
-      <Metadata />
+      <Metadata/>
       <Provider initialSession={pageProps.initialSession}>
+        <Header/>
+
         <Component {...pageProps} />
       </Provider>
     </>
@@ -42,8 +46,8 @@ export default trpc.withTRPC(T4App)
 
 const Metadata = () => (
   <Head>
-    <DefaultSeo title={title} description={description} />
-    <meta name='viewport' content='width=device-width,initial-scale=1' />
+    <DefaultSeo title={title} description={description}/>
+    <meta name='viewport' content='width=device-width,initial-scale=1'/>
     {/* Ensure a minimum width of 100% */}
     <style>
       {`
@@ -53,14 +57,14 @@ const Metadata = () => (
       `}
     </style>
     {/* Favicons */}
-    <link rel='icon' href='/pwa/icons/favicon.ico' />
-    <link rel='shortcut icon' href='/pwa/icons/favicon.ico' />
-    <meta name='theme-color' content='#FFFFFF' />
+    <link rel='icon' href='/pwa/icons/favicon.ico'/>
+    <link rel='shortcut icon' href='/pwa/icons/favicon.ico'/>
+    <meta name='theme-color' content='#FFFFFF'/>
     {/* PWA App Icons for iOS */}
-    <link rel='apple-touch-icon' href='/pwa/icons/touch-icon-iphone.png' />
-    <link rel='apple-touch-icon' sizes='152x152' href='/pwa/icons/touch-icon-ipad.png' />
-    <link rel='apple-touch-icon' sizes='180x180' href='/pwa/icons/touch-icon-iphone-retina.png' />
-    <link rel='apple-touch-icon' sizes='167x167' href='/pwa/icons/touch-icon-ipad-retina.png' />
+    <link rel='apple-touch-icon' href='/pwa/icons/touch-icon-iphone.png'/>
+    <link rel='apple-touch-icon' sizes='152x152' href='/pwa/icons/touch-icon-ipad.png'/>
+    <link rel='apple-touch-icon' sizes='180x180' href='/pwa/icons/touch-icon-iphone-retina.png'/>
+    <link rel='apple-touch-icon' sizes='167x167' href='/pwa/icons/touch-icon-ipad-retina.png'/>
     {/* PWA Splash Screens for iOS */}
     <link
       rel='apple-touch-startup-image'

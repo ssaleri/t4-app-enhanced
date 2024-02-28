@@ -1,14 +1,14 @@
-import { HomeScreen } from 'app/features/home/screen'
+import { AboutScreen } from 'app/features/about/screen'
 import Head from 'next/head'
 
 export default function Page() {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>About</title>
       </Head>
 
-      <HomeScreen/>
+      <AboutScreen/>
     </>
   )
 }
