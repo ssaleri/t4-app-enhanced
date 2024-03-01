@@ -1,15 +1,26 @@
 import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import { SolitoImage } from "solito/image";
 import { Paragraph, XStack, YStack } from "tamagui";
+import { useDeviceMedia } from "app/hooks/useDeviceMedia";
+import { useLink } from "solito/link";
 
-const Project = ({project, numColumns}: { project: Object, numColumns: number }) => {
+const Project = ({project}: { project: Object }) => {
+  const {isMobile} = useDeviceMedia();
+  const projectImageDimension = isMobile ? 100 : 200;
+
+  const projectLink = useLink({
+    href: `/portfolio/${project?.id}`,
+  })
+
+
   return (
-    <XStack borderColor={"$blue6"} borderWidth={"1"} borderRadius={"$6"} backgroundColor={"$blue3"} marginTop={"$4"}
-            marginRight={numColumns > 1 ? "$4" : undefined}>
+    <TouchableOpacity {...projectLink}>
+    <XStack borderColor={"$blue6"} borderWidth={"1"} borderRadius={"$6"} backgroundColor={"$blue3"} marginTop={"$4"} width={1000}>
       <SolitoImage
         src='/t4-logo.png'
-        width={200}
-        height={200}
+        width={projectImageDimension}
+        height={projectImageDimension}
         alt='Project Logo'
       />
       <YStack paddingHorizontal={16}>
@@ -21,6 +32,7 @@ const Project = ({project, numColumns}: { project: Object, numColumns: number })
         </Paragraph>
       </YStack>
     </XStack>
+    </TouchableOpacity>
   );
 };
 export default Project;

@@ -1,12 +1,14 @@
-import { ScrollView, useWindowDimensions, YStack } from '@t4/ui'
+import { ScrollView, useWindowDimensions, YStack, useMedia } from '@t4/ui'
 import React from 'react'
 import { FlatList } from 'react-native'
 import Section from "@t4/ui/src/components/organisms/Section/Section";
 import Project from "@t4/ui/src/components/organisms/Project/Project";
+import { useDeviceMedia } from "app/hooks/useDeviceMedia";
 
 const experiences = {
   "projects": [
     {
+      "id": "5",
       "name": "B*******",
       "position": "Mobile Software Engineer",
       "startYear": "2023",
@@ -15,6 +17,7 @@ const experiences = {
       "shortDescription": "Luxury Watch Faces for Apple Watch"
     },
     {
+      "id": "4",
       "name": "S*********",
       "position": "Mobile Software Engineer",
       "startYear": "2023",
@@ -23,6 +26,7 @@ const experiences = {
       "shortDescription": "Power Management reports on Android tablets"
     },
     {
+      "id": "3",
       "name": "D**********",
       "position": "Mobile Software Engineer",
       "startYear": "2021",
@@ -31,6 +35,7 @@ const experiences = {
       "shortDescription": "Ho.Re.Ca Supply Delivery app for iOS and Android"
     },
     {
+      "id": "2",
       "name": "S*********",
       "position": "Mobile Software Engineer",
       "startYear": "2019",
@@ -39,6 +44,7 @@ const experiences = {
       "shortDescription": "Micromobility gamification app for iOS and Android"
     },
     {
+      "id": "1",
       "name": "W*********",
       "position": "Full-stack Web Engineer",
       "startYear": "2017",
@@ -49,9 +55,8 @@ const experiences = {
   ]
 }
 
-export function PortfolioScreen() {
-  const windowWidth = useWindowDimensions().width;
-  const handleNumColumns = windowWidth > 1200 ? 3 : 1;
+export const PortfolioScreen = () => {
+  const {isMobile} = useDeviceMedia();
 
   return (
     <ScrollView>
@@ -61,11 +66,9 @@ export function PortfolioScreen() {
           <Section.Description>Major projects I have been involved in</Section.Description>
           <Section.Body>
             <FlatList
-              key={handleNumColumns}
               data={experiences.projects}
-              renderItem={({item}) => <Project project={item} numColumns={handleNumColumns}/>}
+              renderItem={({item}) => <Project project={item}/>}
               keyExtractor={(item) => item.name}
-              numColumns={handleNumColumns}
             />
           </Section.Body>
         </Section>

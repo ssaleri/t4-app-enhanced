@@ -21,6 +21,7 @@ import { useLink } from 'solito/link'
 import { useSheetOpen } from '../../atoms/sheet'
 import Section from "@t4/ui/src/components/organisms/Section/Section";
 
+
 const frameworks = [
   {label: 'React Native', gradientDirection: "0deg", fromGradientColor: "var(--blue9)", toGradientColor: "var(--red9)"},
   {label: 'Next.js', gradientDirection: "0deg", fromGradientColor: "blue", toGradientColor: "green"},
@@ -40,35 +41,40 @@ export function HomeScreen() {
     return () => clearInterval(interval);
   }, [frameworks.length]);
 
+  const signInLink = useLink({
+    href: '/tabs',
+  })
+
   return (
-    <ScrollView>
-      <YStack flex={1} jc='center' ai='center' space='$4' px='$4' space='$4' pt={"$10"}>
-        <SolitoImage src='/t4-logo.png' width={128} height={128} alt='T4 Logo'/>
-        <H1 textAlign='center'>👋 simone.dev</H1>
-        <Separator/>
-        <Paragraph size={'$7'}>
-          Cross-platform applications made with
-          <Text
-            backgroundClip={'text'}
-            className="clip-text"
-            fontWeight={'bold'}
-            style={{
-              backgroundClip: "text",
-              color: "transparent",
-              backgroundImage: `-webkit-linear-gradient(
+    <YStack flex={1} jc='center' ai='center' space='$4' px='$4' space='$4' pt={"$10"}>
+      <SolitoImage src='/t4-logo.png' width={128} height={128} alt='T4 Logo'/>
+      <H1 textAlign='center'>👋 simone.dev</H1>
+      <Separator/>
+      <Paragraph size={'$7'}>
+        Cross-platform applications made with
+        <Text
+          backgroundClip={'text'}
+          className="clip-text"
+          fontWeight={'bold'}
+          style={{
+            backgroundClip: "text",
+            color: "transparent",
+            backgroundImage: `-webkit-linear-gradient(
                             ${frameworks[index].gradientDirection},
                             var(--blue9),
                             var(--red9)
             )`,
-            }}
-          >
-            {" " + frameworks[index].label}
-          </Text>
-        </Paragraph>
+          }}
+        >
+          {" " + frameworks[index].label}
+        </Text>
+      </Paragraph>
 
 
-      </YStack>
-    </ScrollView>
+      <Button {...signInLink}>Sign in</Button>
+
+
+    </YStack>
   )
 }
 
