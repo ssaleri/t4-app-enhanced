@@ -1,4 +1,4 @@
-import { Paragraph, Spinner, VirtualList, YStack } from '@t4/ui'
+import { Paragraph, Spinner, VirtualList, YStack, ScrollView } from '@t4/ui'
 import { UpsListError } from '@t4/ui/src/ups/UpsListError'
 import { UpsListItem } from '@t4/ui/src/ups/UpsListItem'
 import { trpc } from 'app/utils/trpc'
@@ -23,8 +23,8 @@ export const UpsScreen = (): React.ReactNode => {
     .otherwise(() => <UpsListError message={upsList.failureReason?.message} />)
 
   return (
-    <YStack fullscreen f={1}>
+    <ScrollView>
       {upsListLayout}
-    </YStack>
+    </ScrollView>
   )
 }

@@ -3,6 +3,7 @@ import React from 'react'
 import { FlatList } from 'react-native'
 import Section from "@t4/ui/src/components/organisms/Section/Section";
 import Project from "@t4/ui/src/components/organisms/Project/Project";
+import {XStack } from '@t4/ui/';
 import { useDeviceMedia } from "app/hooks/useDeviceMedia";
 
 const experiences = {
@@ -59,20 +60,19 @@ export const PortfolioScreen = () => {
   const {isMobile} = useDeviceMedia();
 
   return (
-    <ScrollView>
-      <YStack flex={1} jc='center' ai='center' px='$4' pt={"$6"}>
-        <Section>
-          <Section.Title>Portfolio</Section.Title>
-          <Section.Description>Major projects I have been involved in</Section.Description>
-          <Section.Body>
-            <FlatList
-              data={experiences.projects}
-              renderItem={({item}) => <Project project={item}/>}
-              keyExtractor={(item) => item.name}
-            />
-          </Section.Body>
-        </Section>
-      </YStack>
-    </ScrollView>
+        <ScrollView>
+          <Section>
+            <Section.Title>Portfolio</Section.Title>
+            <Section.Description>Major projects I have been involved in</Section.Description>
+            <Section.Body>
+              <FlatList
+                data={experiences.projects}
+                renderItem={({item}) => <Project project={item}/>}
+                keyExtractor={(item) => item.name}
+                ItemSeparatorComponent={<XStack mt={"$2"} />}
+              />
+            </Section.Body>
+          </Section>
+        </ScrollView>
   )
 }

@@ -6,11 +6,7 @@ export default function Layout() {
   return (
     <>
       <Tabs.Screen/>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      />
+      <Stack />
     </>
 
   )

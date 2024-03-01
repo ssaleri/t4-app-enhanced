@@ -1,10 +1,10 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { H1, H4 } from '@t4/ui';
+import { H1, H4, Separator } from '@t4/ui';
 
 const Section = ({children}) => {
   return (
-    <View style={styles.section}>
+    <View>
       {children}
     </View>
   );
@@ -26,23 +26,21 @@ const SectionDescription = ({children}) => {
   );
 };
 
+const SectionDivider = () => {
+  return (
+    <Separator marginVertical={"$2"} borderColor={"$gray6"}/>
+  );
+};
+
 const SectionBody = ({children}) => {
   return (
-    <View style={styles.body}>
+    <View>
       {children}
     </View>
   );
 };
 Section.Title = SectionTitle;
 Section.Description = SectionDescription;
+Section.Divider = SectionDivider;
 Section.Body = SectionBody;
 export default Section;
-
-const styles = StyleSheet.create({
-  section: {
-    //marginBottom: 32,
-  },
-  body: {
-    //paddingHorizontal: 16,
-  },
-});
