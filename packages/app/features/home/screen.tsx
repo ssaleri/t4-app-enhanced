@@ -42,7 +42,7 @@ export function HomeScreen() {
   }, [frameworks.length]);
 
   const signInLink = useLink({
-    href: '/tabs',
+    href: '/Home',
   })
 
   return (
