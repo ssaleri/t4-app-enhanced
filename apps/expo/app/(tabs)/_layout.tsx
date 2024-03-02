@@ -4,9 +4,6 @@ export default function Layout() {
   return (
     <Tabs screenOptions={{headerShown: false}}>
       <Tabs.Screen
-        name="Home"
-      />
-      <Tabs.Screen
         name="Blog"
       />
       <Tabs.Screen
