@@ -57,8 +57,6 @@ const experiences = {
 }
 
 export const PortfolioScreen = () => {
-  const {isMobile} = useDeviceMedia();
-
   return (
         <ScrollView>
           <Section>

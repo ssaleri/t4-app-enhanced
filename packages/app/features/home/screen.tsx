@@ -1,26 +1,10 @@
-import {
-  Button,
-  H1,
-  H3,
-  Paragraph,
-  ScrollView,
-  Separator,
-  Sheet,
-  useToastController,
-  XStack,
-  YStack,
-  Text
-} from '@t4/ui'
-import { ChevronDown } from '@tamagui/lucide-icons'
-import { useSupabase } from 'app/utils/supabase/hooks/useSupabase'
-import { useUser } from 'app/utils/supabase/hooks/useUser'
-import { trpc } from 'app/utils/trpc'
-import React, { useEffect, useState } from 'react'
+import { Button, H1, Paragraph, Separator, Text, YStack } from '@t4/ui'
+import React, { useEffect, useState } from 'react';
+import { Platform, StyleSheet, View } from 'react-native';
 import { SolitoImage } from 'solito/image'
-import { useLink } from 'solito/link'
-import { useSheetOpen } from '../../atoms/sheet'
-import Section from "@t4/ui/src/components/organisms/Section/Section";
-
+import { useLink } from 'solito/link';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useDeviceMedia } from "app/hooks/useDeviceMedia";
 
 const frameworks = [
   {label: 'React Native', gradientDirection: "0deg", fromGradientColor: "var(--blue9)", toGradientColor: "var(--red9)"},
@@ -32,49 +16,56 @@ const frameworks = [
 
 export function HomeScreen() {
   const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % frameworks.length);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [frameworks.length]);
+  const framework = frameworks[index];
+  const gradientDirection = framework?.gradientDirection || "0deg";
+  const {isDesktopWeb} = useDeviceMedia();
 
   const signInLink = useLink({
     href: '/Home',
   })
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % frameworks.length);
+    }, 1200);
+
+    return () => clearInterval(interval);
+  }, [frameworks.length]);
+
   return (
-    <YStack flex={1} jc='center' ai='center' space='$4' px='$4' space='$4' pt={"$10"}>
-      <SolitoImage src='/t4-logo.png' width={128} height={128} alt='T4 Logo'/>
-      <H1 textAlign='center'>👋 simone.dev</H1>
-      <Separator/>
-      <Paragraph size={'$7'}>
-        Cross-platform applications made with
-        <Text
-          backgroundClip={'text'}
-          className="clip-text"
-          fontWeight={'bold'}
-          style={{
-            backgroundClip: "text",
-            color: "transparent",
-            backgroundImage: `-webkit-linear-gradient(
-                            ${frameworks[index].gradientDirection},
-                            var(--blue9),
-                            var(--red9)
-            )`,
-          }}
-        >
-          {" " + frameworks[index].label}
-        </Text>
-      </Paragraph>
-
-
-      <Button {...signInLink}>Sign in</Button>
-
-
-    </YStack>
+    <SafeAreaView flex={1}>
+      <YStack flex={11} ai='center' space='$4' px='$4' pt={"$10"} pb={"$6"}>
+        <SolitoImage src='/t4-logo.png' width={128} height={128} alt='T4 Logo'/>
+        <H1 textAlign='center'>👋 simone.dev</H1>
+        <Separator/>
+        <Paragraph size={'$7'}>
+          Cross-platform applications made with
+          <Text
+            backgroundClip={Platform.OS === 'web' ? 'text' : undefined}
+            className="clip-text"
+            fontWeight={'bold'}
+            style={Platform.OS === 'web' && styles({gradientDirection: gradientDirection}).gradientText}
+          >
+            {" " + framework?.label}
+          </Text>
+        </Paragraph>
+      </YStack>
+      <YStack flex={1} jc='center' ai='center' space='$4' px='$4' py={"$5"}>
+        <Button themeInverse {...signInLink} alignSelf="center" br="$5" size="$5"
+                width={!isDesktopWeb && "100%"}>Jump in</Button>
+      </YStack>
+    </SafeAreaView>
   )
 }
 
+const styles = ({gradientDirection}: any) => StyleSheet.create({
+  gradientText: {
+    backgroundClip: "text",
+    color: "transparent",
+    backgroundImage: `-webkit-linear-gradient(
+                            ${gradientDirection},
+                            var(--blue9),
+                            var(--red9)
+            )`,
+  }
+})
