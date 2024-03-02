@@ -5,7 +5,7 @@ import { Paragraph, YStack } from 'tamagui'
 
 export const UpsListItem = (item: Ups): React.ReactElement => {
   return (
-    <YStack flexDirection='row' paddingLeft='$2'>
+    <YStack flexDirection='row'>
       <SolitoImage
         src='/t4-logo.png'
         width={56}

@@ -63,7 +63,7 @@ export const PortfolioScreen = () => {
         ListHeaderComponent={
           <Section>
             <Section.Title>Portfolio</Section.Title>
-            <Section.Description>Major projects I have been involved in</Section.Description>
+            <Section.Description>Projects I have been involved in</Section.Description>
           </Section>
         }
         ListFooterComponent={<YStack height={"$12"}/>}

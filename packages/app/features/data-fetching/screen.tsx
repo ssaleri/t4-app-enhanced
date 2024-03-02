@@ -3,9 +3,11 @@ import { trpc } from 'app/utils/trpc'
 import React from 'react'
 import { match } from 'ts-pattern'
 import { error, loading, success } from '../../utils/trpc/patterns'
-import { Button, XStack } from "@t4/ui/src";
+import { Button, XStack, ScrollView } from "@t4/ui/src";
 import { useUser } from "app/utils/supabase/hooks/useUser";
 import { useLink } from "solito/link";
+import { supabase } from "app/utils/supabase/client";
+import Section from "@t4/ui/src/components/organisms/Section/Section";
 
 export function DataFetchingScreen() {
   const {user} = useUser()
@@ -32,8 +34,11 @@ export function DataFetchingScreen() {
     .otherwise(() => <Paragraph>{protectedRoute.failureReason?.message}</Paragraph>)
 
   return (
-    <YStack f={1} jc='center' ai='center' p='$4' space='$4'>
-      <H1>Data Fetching</H1>
+    <ScrollView contentContainerStyle={{alignItems: "center"}}>
+      <Section>
+        <Section.Title>Data Fetching</Section.Title>
+        <Section.Description>Useful resources to logged users</Section.Description>
+      </Section>
       <H2>Public Route</H2>
       {helloWorldLayout}
       <H2>Protected Route</H2>
@@ -60,6 +65,6 @@ export function DataFetchingScreen() {
           </Button>
         </XStack>
       )}
-    </YStack>
+    </ScrollView>
   )
 }

@@ -25,16 +25,12 @@ export function AboutScreen() {
 
   return (
     <ScrollView>
-      <YStack flex={1} pb={644} jc='center' ai='center' space='$4' px='$4' space='$4' pt={"$10"}>
         <Section>
           <Section.Title>About</Section.Title>
-          <Section.Body>
-            <Paragraph>This is the about section</Paragraph>
-          </Section.Body>
+          <Section.Description>Some info about me</Section.Description>
         </Section>
 
-
-        <H3>🦮🐴 App Demos</H3>
+        <H3 textAlign={"center"} py={"$6"}>🦮🐴 App Demos</H3>
         <YStack space='$2'>
           <Button {...virtualizedListLink} space='$2'>
             Virtualized List
@@ -53,7 +49,6 @@ export function AboutScreen() {
           </Button>
         </YStack>
 
-      </YStack>
     </ScrollView>
   )
 }
