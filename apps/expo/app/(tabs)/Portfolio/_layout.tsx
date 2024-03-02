@@ -4,10 +4,8 @@ import { HomeScreen } from "app/features/home/screen";
 
 export default function Layout() {
   return (
-    <>
-      <Tabs.Screen/>
-      <Stack />
-    </>
-
+      <Stack screenOptions={{headerShown: false}}>
+        <Stack.Screen name={"Portfolio"}/>
+      </Stack>
   )
 }

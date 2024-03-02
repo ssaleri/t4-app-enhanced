@@ -1,9 +1,9 @@
-import { ScrollView, useWindowDimensions, YStack, useMedia } from '@t4/ui'
+import { useWindowDimensions, YStack, useMedia } from '@t4/ui'
 import React from 'react'
 import { FlatList } from 'react-native'
 import Section from "@t4/ui/src/components/organisms/Section/Section";
 import Project from "@t4/ui/src/components/organisms/Project/Project";
-import {XStack } from '@t4/ui/';
+import { XStack, ScrollView } from '@t4/ui/';
 import { useDeviceMedia } from "app/hooks/useDeviceMedia";
 
 const experiences = {
@@ -58,19 +58,22 @@ const experiences = {
 
 export const PortfolioScreen = () => {
   return (
-        <ScrollView>
+    <>
+      <FlatList
+        ListHeaderComponent={
           <Section>
             <Section.Title>Portfolio</Section.Title>
             <Section.Description>Major projects I have been involved in</Section.Description>
-            <Section.Body>
-              <FlatList
-                data={experiences.projects}
-                renderItem={({item}) => <Project project={item}/>}
-                keyExtractor={(item) => item.name}
-                ItemSeparatorComponent={<XStack mt={"$2"} />}
-              />
-            </Section.Body>
           </Section>
-        </ScrollView>
+        }
+        ListFooterComponent={<YStack height={"$12"}/>}
+        contentContainerStyle={{paddingHorizontal: 16}}
+        data={experiences.projects}
+        renderItem={({item}) => <Project project={item}/>}
+        keyExtractor={(item) => item.name}
+        ItemSeparatorComponent={<XStack mt={"$2"}/>}
+      />
+
+    </>
   )
 }

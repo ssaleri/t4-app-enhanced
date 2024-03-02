@@ -18,12 +18,10 @@ const Project = ({project}: { project: Object }) => {
       <XStack
         backgroundColor={"$gray5"}
         borderRadius={"$2"}
-        flex={1}
-        flexWrap={"wrap"}
         hoverStyle={{
           backgroundColor: '$blue6',
         }}
-        p={"$2"}>
+      >
         <SolitoImage
           src='/t4-logo.png'
           width={projectImageDimension}

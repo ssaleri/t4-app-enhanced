@@ -3,8 +3,20 @@ import { trpc } from 'app/utils/trpc'
 import React from 'react'
 import { match } from 'ts-pattern'
 import { error, loading, success } from '../../utils/trpc/patterns'
+import { Button, XStack } from "@t4/ui/src";
+import { useUser } from "app/utils/supabase/hooks/useUser";
+import { useLink } from "solito/link";
 
 export function DataFetchingScreen() {
+  const {user} = useUser()
+  const signInLink = useLink({
+    href: '/sign-in',
+  })
+
+  const signUpLink = useLink({
+    href: '/sign-up',
+  })
+
   const helloWorld = trpc.hello.world.useQuery<string>('world')
   const helloWorldLayout = match(helloWorld)
     .with(error, () => <Paragraph>{helloWorld.failureReason?.message}</Paragraph>)
@@ -26,6 +38,28 @@ export function DataFetchingScreen() {
       {helloWorldLayout}
       <H2>Protected Route</H2>
       {protectedRouteLayout}
+
+      {user ? (
+        <Button
+          onPress={async () => {
+            supabase.auth.signOut()
+            // Clear tanstack query cache of authenticated routes
+            utils.auth.secretMessage.reset()
+          }}
+          space='$2'
+        >
+          Sign Out
+        </Button>
+      ) : (
+        <XStack space='$2'>
+          <Button {...signInLink} space='$2'>
+            Sign In
+          </Button>
+          <Button {...signUpLink} space='$2'>
+            Sign Up
+          </Button>
+        </XStack>
+      )}
     </YStack>
   )
 }

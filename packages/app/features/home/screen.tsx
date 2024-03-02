@@ -20,8 +20,8 @@ export function HomeScreen() {
   const gradientDirection = framework?.gradientDirection || "0deg";
   const {isDesktopWeb} = useDeviceMedia();
 
-  const signInLink = useLink({
-    href: '/Home',
+  const blogLink = useLink({
+    href: '/Blog',
   })
 
   useEffect(() => {
@@ -51,8 +51,7 @@ export function HomeScreen() {
         </Paragraph>
       </YStack>
       <YStack flex={1} jc='center' ai='center' space='$4' px='$4' py={"$5"}>
-        <Button themeInverse {...signInLink} alignSelf="center" br="$5" size="$5"
-                width={!isDesktopWeb && "100%"}>Jump in</Button>
+        <Button themeInverse {...blogLink} alignSelf="center" br="$5" size="$5" width={isDesktopWeb ? undefined : "100%"}>Jump in</Button>
       </YStack>
     </SafeAreaView>
   )

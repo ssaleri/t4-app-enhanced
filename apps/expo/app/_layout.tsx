@@ -2,6 +2,10 @@ import { Provider } from 'app/provider'
 import { useFonts } from 'expo-font'
 import { SplashScreen, Stack } from 'expo-router'
 import { useEffect } from 'react'
+import { Tabs } from "expo-router/tabs";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { View } from "react-native";
+
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -34,9 +38,7 @@ export default function RootLayout() {
 
   return (
     <Provider initialSession={null}>
-      <Stack screenOptions={{
-        headerShown: false,
-      }}/>
+      <Stack screenOptions={{headerShown: false}} />
     </Provider>
   )
 }
