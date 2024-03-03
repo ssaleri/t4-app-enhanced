@@ -1,20 +1,19 @@
 import { StyleSheet, View, SafeAreaView as SafeAreaViewNative } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export const SafeAreaView = ({children}) => {
+export const SafeAreaView = ({children, bc, flex }) => {
   const insets = useSafeAreaInsets()
   return (
-    <View style={styles(insets).container}>
+    <View style={styles(insets, bc, flex).container}>
       {children}
     </View>
   )
 }
 
-const styles = (insets) => StyleSheet.create({
+const styles = (insets, bc) => StyleSheet.create({
   container: {
+    backgroundColor: bc,
     flex: 1,
-    paddingBottom: 64,
-    paddingTop: insets.top,
     paddingLeft: insets.left,
     paddingRight: insets.right,
     paddingBottom: insets.bottom,

@@ -1,57 +1,93 @@
 import { useWindowDimensions, YStack, useMedia } from '@t4/ui'
 import React from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import Section from "@t4/ui/src/components/organisms/Section/Section";
 import Project from "@t4/ui/src/components/organisms/Project/Project";
-import { XStack, ScrollView } from '@t4/ui/';
-import { useDeviceMedia } from "app/hooks/useDeviceMedia";
+import { XStack, ScrollView, Text } from '@t4/ui/';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { Paragraph } from "tamagui";
+
+const iconColor = "#484848";
+const iconDimension = 24;
+const iconDimensionBig = 32;
+const iconDimensionLittle = 16;
 
 const experiences = {
   "projects": [
     {
       "id": "5",
       "name": "B*******",
-      "position": "Mobile Software Engineer",
+      "role": "Mobile Software Engineer",
       "startYear": "2023",
       "endYear": "current",
       "description": "I worked as a software engineer at B*******. I was responsible for developing mobile applications for iOS and WatchOS.",
-      "shortDescription": "Luxury Watch Faces for Apple Watch"
+      "shortDescription": "Luxury Watch Faces",
+      "technologies": <>
+        <MaterialCommunityIcons name="react" size={iconDimension} color={iconColor}/>
+        <MaterialCommunityIcons name={"language-typescript"} size={iconDimension} color={iconColor}/>
+        <MaterialCommunityIcons name="language-swift" size={iconDimension} color={iconColor}/>
+      </>
     },
     {
       "id": "4",
       "name": "S*********",
-      "position": "Mobile Software Engineer",
+      "role": "Mobile Software Engineer",
       "startYear": "2023",
       "endYear": "current",
       "description": "I worked as a software engineer at S*********. I was responsible for developing mobile applications for iOS and WatchOS.",
-      "shortDescription": "Power Management reports on Android tablets"
+      "shortDescription": "Electrical Maintenance",
+      "technologies": <>
+        <MaterialCommunityIcons name="react" size={iconDimension} color={iconColor}/>
+        <MaterialCommunityIcons name={"language-typescript"} size={iconDimension} color={iconColor}/>
+        <MaterialCommunityIcons name="android" size={iconDimension} color={iconColor} />
+      </>
     },
     {
       "id": "3",
       "name": "D**********",
-      "position": "Mobile Software Engineer",
+      "role": "Mobile Software Engineer",
       "startYear": "2021",
       "endYear": "2023",
       "description": "I worked as a software engineer at D**********. I was in close relationship with Design Team and I had been responsible for developing mobile applications for iOS and Android.",
-      "shortDescription": "Ho.Re.Ca Supply Delivery app for iOS and Android"
+      "shortDescription": "Ho.Re.Ca. Supply Delivery",
+      "technologies": <>
+        <MaterialCommunityIcons name="react" size={iconDimension} color={iconColor}/>
+        <MaterialCommunityIcons name={"language-typescript"} size={iconDimension} color={iconColor}/>
+        <Fontisto name="redux" size={iconDimensionLittle} color={iconColor}/>
+      </>
     },
     {
       "id": "2",
       "name": "S*********",
-      "position": "Mobile Software Engineer",
+      "role": "Mobile Software Engineer",
       "startYear": "2019",
       "endYear": "2020",
       "description": "I worked as a software engineer at S*********. I was in close relationship with Design Team and I had been responsible for developing mobile applications for iOS and Android.",
-      "shortDescription": "Micromobility gamification app for iOS and Android"
+      "shortDescription": "Micro-mobility Gamification",
+      "technologies": <>
+        <MaterialCommunityIcons name="react" size={iconDimension} color={iconColor}/>
+        <MaterialCommunityIcons name="language-javascript" size={iconDimension} color={iconColor} />
+        <MaterialCommunityIcons name="language-ruby-on-rails" size={iconDimension} color={iconColor} />
+      </>
     },
     {
       "id": "1",
       "name": "W*********",
-      "position": "Full-stack Web Engineer",
+      "role": "Full-stack Web Engineer",
       "startYear": "2017",
       "endYear": "2018",
       "description": "I worked as a software engineer at W*********. I was in close relationship with Design Team and I had been responsible for developing mobile applications for iOS and Android.",
-      "shortDescription": "Smart Working Management platform for Web"
+      "shortDescription": "Remote Work Social Platform",
+      "technologies": <>
+        <MaterialCommunityIcons name="bootstrap" size={iconDimension} color={iconColor} />
+        <MaterialCommunityIcons name="language-javascript" size={iconDimension} color={iconColor} />
+        <MaterialCommunityIcons name="language-ruby-on-rails" size={iconDimension} color={iconColor} />
+
+      </>
     },
   ]
 }
@@ -59,15 +95,15 @@ const experiences = {
 export const PortfolioScreen = () => {
   return (
     <>
+      <View style={styles.headerSection} position={"absolute"}>
+        <Section>
+          <Section.Title>Portfolio</Section.Title>
+          <Section.Description>Projects I have been involved in</Section.Description>
+        </Section>
+      </View>
       <FlatList
-        ListHeaderComponent={
-          <Section>
-            <Section.Title>Portfolio</Section.Title>
-            <Section.Description>Projects I have been involved in</Section.Description>
-          </Section>
-        }
         ListFooterComponent={<YStack height={"$12"}/>}
-        contentContainerStyle={{paddingHorizontal: 16}}
+        contentContainerStyle={styles.container}
         data={experiences.projects}
         renderItem={({item}) => <Project project={item}/>}
         keyExtractor={(item) => item.name}
@@ -77,3 +113,22 @@ export const PortfolioScreen = () => {
     </>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 200,
+    backgroundColor: "white",
+    marginTop: 128,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+  },
+  headerSection: {
+    backgroundColor: "#b4f6ff",
+    width: "100%",
+    height: "100%",
+    flex: 1,
+    flexDirection: "column"
+  },
+})
