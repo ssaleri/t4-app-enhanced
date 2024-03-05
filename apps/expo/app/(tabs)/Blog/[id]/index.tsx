@@ -1,6 +1,6 @@
-import { ParamsScreen } from 'app/features/params/screen'
 import { Stack } from 'expo-router'
 import { createParam } from "solito";
+import { ProjectScreen } from "app/features/project/screen";
 
 const {useParam} = createParam<{ id: string }>()
 
@@ -16,7 +16,7 @@ export default function Screen() {
           headerShown: true,
         }}
       />
-      <ParamsScreen />
+      <ProjectScreen />
     </>
   )
 }
