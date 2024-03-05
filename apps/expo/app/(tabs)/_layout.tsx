@@ -1,14 +1,13 @@
 import { Tabs } from "expo-router/tabs";
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
-import { StyleSheet, Text, SafeAreaView } from 'react-native';
+import { Keyboard, SafeAreaView, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Button, useTheme } from '@t4/ui'
-import { useLink } from 'solito/link';
 import { useSheetOpen } from "app/atoms/sheet";
 import React, { useState } from "react";
-import { Sheet, View } from "@t4/ui/src";
+import { Sheet } from "@t4/ui/src";
 import { ChevronDown } from "@tamagui/lucide-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { StatusBar } from "expo-status-bar";
+import { SendMessageScreen } from "app/features/sendMessage/screen";
 
 export default function Layout() {
   const theme = useTheme()
@@ -81,22 +80,24 @@ export default function Layout() {
         modal
         open={open}
         onOpenChange={setOpen}
-        snapPoints={[80]}
+        snapPoints={[90]}
         position={position}
         onPositionChange={setPosition}
         dismissOnSnapToBottom
       >
         <Sheet.Overlay/>
-        <Sheet.Frame alignItems='center' justifyContent='center'>
+        <Sheet.Frame alignItems='center' justifyContent='flex-start'>
           <Sheet.Handle/>
           <Button
-            size='$6'
+            transparent={true}
+            size='$4'
             circular
             icon={ChevronDown}
             onPress={() => {
               setOpen(false)
             }}
           />
+          <SendMessageScreen/>
         </Sheet.Frame>
       </Sheet>
       </SafeAreaView>
