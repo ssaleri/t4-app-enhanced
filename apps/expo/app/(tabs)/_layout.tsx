@@ -1,37 +1,28 @@
 import { Tabs } from "expo-router/tabs";
 import SimpleLineIcons from '@expo/vector-icons/SimpleLineIcons';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text, SafeAreaView } from 'react-native';
 import { Button, useTheme } from '@t4/ui'
 import { useLink } from 'solito/link';
 import { useSheetOpen } from "app/atoms/sheet";
 import React, { useState } from "react";
 import { Sheet, View } from "@t4/ui/src";
 import { ChevronDown } from "@tamagui/lucide-icons";
-import { SafeAreaView } from '@t4/ui/src/components/templates/SafeAreaView/SafeAreaView';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 
 export default function Layout() {
   const theme = useTheme()
-  console.log(theme)
-
   const backgroundColor = theme.color.val;
   const insets = useSafeAreaInsets()
-
-  const sendMessageLink = useLink(
-    {
-      href: "/sendMessage"
-    }
-  )
-
   const [open, setOpen] = useSheetOpen()
   const [position, setPosition] = useState(0)
 
   return (
     <>
-    <View flex={0} backgroundColor={"#b4f6ff"} height={insets.top}/>
-    <SafeAreaView>
-      <Tabs screenOptions={{
-        headerShown: false, tabBarStyle: {
+      <SafeAreaView style={stylesWithInsets(insets).safeAreaView}>
+      <Tabs title={"home"} screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
           backgroundColor: backgroundColor,
           ...stylesWithInsets(insets).tabBar,
           ...styles.shadow
@@ -108,7 +99,7 @@ export default function Layout() {
           />
         </Sheet.Frame>
       </Sheet>
-    </SafeAreaView>
+      </SafeAreaView>
     </>
   )
 }
@@ -117,13 +108,18 @@ const stylesWithInsets = (insets) => StyleSheet.create({
   tabBar: {
     position: "absolute",
     bottom: 0,
-    left: 16,
-    right: 16,
+    left: 10,
+    right: 10,
     elevation: 0,
     borderRadius: 16,
     paddingBottom: 0,
     minHeight: 64,
-  }
+    //marginBottom: insets.bottom,
+  },
+  safeAreaView: {
+    flex: 1,
+    marginTop: -insets.top,
+  },
 });
 
 const styles = StyleSheet.create({

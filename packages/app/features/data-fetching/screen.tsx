@@ -1,4 +1,4 @@
-import { H1, H2, Paragraph, YStack } from '@t4/ui'
+import { H1, H2, H4, Paragraph, YStack } from '@t4/ui'
 import { trpc } from 'app/utils/trpc'
 import React from 'react'
 import { match } from 'ts-pattern'
@@ -35,10 +35,7 @@ export function DataFetchingScreen() {
 
   return (
     <ScrollView contentContainerStyle={{alignItems: "center"}}>
-      <Section>
-        <Section.Title>Data Fetching</Section.Title>
-        <Section.Description>Useful resources to logged users</Section.Description>
-      </Section>
+      <H4 alignSelf={"left"} textAlign={"left"} marginVertical={'$2'}>Useful resources to logged users</H4>
       <H2>Public Route</H2>
       {helloWorldLayout}
       <H2>Protected Route</H2>

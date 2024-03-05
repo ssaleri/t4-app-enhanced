@@ -24,12 +24,7 @@ export function AboutScreen() {
   })
 
   return (
-    <ScrollView>
-        <Section>
-          <Section.Title>About</Section.Title>
-          <Section.Description>Some info about me</Section.Description>
-        </Section>
-
+    <>
         <H3 textAlign={"center"} py={"$6"}>🦮🐴 App Demos</H3>
         <YStack space='$2'>
           <Button {...virtualizedListLink} space='$2'>
@@ -48,7 +43,6 @@ export function AboutScreen() {
             Show Toast
           </Button>
         </YStack>
-
-    </ScrollView>
+    </>
   )
 }

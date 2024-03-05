@@ -5,16 +5,16 @@ import { Paragraph, XStack, YStack, Text, H1, H4 } from "@t4/ui";
 import { useDeviceMedia } from "app/hooks/useDeviceMedia";
 import { useLink } from "solito/link";
 
-const Project = ({project}: { project: Object }) => {
+const Post = ({post}: { post: Object }) => {
   const {isMobile} = useDeviceMedia();
   const projectImageDimension = isMobile ? 80 : 200;
 
-  const projectLink = useLink({
-    href: `/Portfolio/${project?.id}`,
+  const postLink = useLink({
+    href: `/Posts/${post?.id}`,
   })
 
   return (
-    <TouchableOpacity {...projectLink}>
+    <TouchableOpacity {...postLink}>
       <XStack
         ai={"center"}
         p={"$2"}
@@ -25,22 +25,19 @@ const Project = ({project}: { project: Object }) => {
         }}
       >
         <SolitoImage
-          src='/t4-logo.png'
+          src={post?.image}
           width={projectImageDimension}
           height={projectImageDimension}
           alt='Project Logo'
         />
         <YStack flex={1} flexWrap={"no-wrap"} px={"$2"}>
           <Paragraph fontWeight={"600"}>
-            {`#${project?.id}`} - {`${project?.shortDescription}`}
+            {`#${post?.id} - ${post?.title}`}
           </Paragraph>
-          <Text>{`Role: ${project?.role}`}</Text>
-          <XStack flex={1} ai={"center"} justifyContent={"flex-start"} marginTop='$2' gap={"$2"}>
-            {project?.technologies}
-          </XStack>
+          <Text>{`Author: ${post?.author}`}</Text>
         </YStack>
       </XStack>
     </TouchableOpacity>
   );
 };
-export default Project;
+export default Post;

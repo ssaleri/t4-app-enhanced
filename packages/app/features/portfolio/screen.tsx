@@ -10,6 +10,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { Paragraph } from "tamagui";
+import { CoverList } from "@t4/ui/src/components/templates/CoverList/CoverList";
 
 const iconColor = "#484848";
 const iconDimension = 24;
@@ -95,40 +96,12 @@ const experiences = {
 export const PortfolioScreen = () => {
   return (
     <>
-      <View style={styles.headerSection} position={"absolute"}>
-        <Section>
-          <Section.Title>Portfolio</Section.Title>
-          <Section.Description>Projects I have been involved in</Section.Description>
-        </Section>
-      </View>
-      <FlatList
-        ListFooterComponent={<YStack height={"$12"}/>}
-        contentContainerStyle={styles.container}
+      <CoverList
+        title={"Portfolio"}
+        description={"Projects I have been involved in"}
         data={experiences.projects}
         renderItem={({item}) => <Project project={item}/>}
-        keyExtractor={(item) => item.name}
-        ItemSeparatorComponent={<XStack mt={"$2"}/>}
       />
-
     </>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 16,
-    paddingTop: 16,
-    paddingBottom: 200,
-    backgroundColor: "white",
-    marginTop: 128,
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-  },
-  headerSection: {
-    backgroundColor: "#b4f6ff",
-    width: "100%",
-    height: "100%",
-    flex: 1,
-    flexDirection: "column"
-  },
-})
