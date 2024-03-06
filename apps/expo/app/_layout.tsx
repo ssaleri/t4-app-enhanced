@@ -38,7 +38,7 @@ export default function RootLayout() {
 
   return (
     <Provider initialSession={null}>
-      <Stack screenOptions={{headerShown: false}} />
+      <Stack screenOptions={{headerShown: false, title:"Home"}} />
     </Provider>
   )
 }

@@ -22,7 +22,6 @@ export const CoverList = ({title, description, data, renderItem }) => {
         />
         <View style={stylesWithParams({insets, oneThirdHeight}).headerTitle}>
           <H1>{title}</H1>
-          <Text mt={8} fontSize={20} fontWeight={"bold"}>{description}</Text>
         </View>
       </View>
       <FlatList

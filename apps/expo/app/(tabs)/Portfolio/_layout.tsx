@@ -4,7 +4,7 @@ import { HomeScreen } from "app/features/home/screen";
 
 export default function Layout() {
   return (
-      <Stack screenOptions={{headerShown: false, presentation: "modal"}}>
+      <Stack screenOptions={{headerShown: false, title: "Portfolio"}}>
         <Stack.Screen name={"Portfolio"}/>
       </Stack>
   )

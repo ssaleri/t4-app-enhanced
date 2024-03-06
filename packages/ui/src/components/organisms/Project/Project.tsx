@@ -10,7 +10,7 @@ const Project = ({project}: { project: Object }) => {
   const projectImageDimension = isMobile ? 80 : 200;
 
   const projectLink = useLink({
-    href: `/Portfolio/${project?.id}`,
+    href: `/Projects/${project?.id}`,
   })
 
   return (

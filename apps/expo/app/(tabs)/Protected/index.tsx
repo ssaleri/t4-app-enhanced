@@ -5,7 +5,9 @@ export default function Page() {
   return (
     <CoverScrollView
       title={"Protected"}
-      description={"Access confidential info"}>
+      description={"Access confidential info"}
+      imageSrc={"https://picsum.photos/320/320?random=1"}
+    >
       <DataFetchingScreen/>
     </CoverScrollView>
   )

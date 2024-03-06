@@ -12,7 +12,7 @@ export default function Screen() {
   return (
     <CoverScrollView
       title={"About"}
-      description={"Some info about me"}
+      imageSrc={"https://picsum.photos/320/320?random=1"}
     >
       <AboutScreen/>
     </CoverScrollView>
