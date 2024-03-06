@@ -1,13 +1,25 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { SolitoImage } from "solito/image";
-import { Paragraph, XStack, YStack, Text, H1, H4 } from "@t4/ui";
+import { Paragraph, XStack, YStack, Text, H1, H4, Card, Image } from "@t4/ui";
 import { useDeviceMedia } from "app/hooks/useDeviceMedia";
 import { useLink } from "solito/link";
+import { Button, H2, useTheme, ZStack } from "tamagui";
+import { LinearGradient } from "tamagui/linear-gradient";
 
+const shadow = {
+  shadowColor: "#000000",
+  shadowOffset: {
+    width: 0,
+    height: 10,
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 3,
+  elevation: 5,
+};
 const Post = ({post}: { post: Object }) => {
-  const {isMobile} = useDeviceMedia();
-  const projectImageDimension = isMobile ? 80 : 200;
+  const theme = useTheme();
+  const minHeight = 212;
 
   const postLink = useLink({
     href: `/Posts/${post?.id}`,
@@ -15,28 +27,30 @@ const Post = ({post}: { post: Object }) => {
 
   return (
     <TouchableOpacity {...postLink}>
-      <XStack
-        ai={"center"}
-        p={"$2"}
-        backgroundColor={"$gray5"}
-        borderRadius={"$2"}
-        hoverStyle={{
-          backgroundColor: '$blue6',
-        }}
-      >
-        <SolitoImage
-          src={post?.image}
-          width={projectImageDimension}
-          height={projectImageDimension}
-          alt='Project Logo'
-        />
-        <YStack flex={1} flexWrap={"no-wrap"} px={"$2"}>
-          <Paragraph fontWeight={"600"}>
-            {`#${post?.id} - ${post?.title}`}
-          </Paragraph>
-          <Text>{`Author: ${post?.author}`}</Text>
-        </YStack>
-      </XStack>
+      <Card {...shadow} size="$4" bordered borderRadius="$6" minHeight={minHeight}>
+        <Card.Header padded>
+          <H2 color={theme.color12.val}>{post?.title}</H2>
+          <Paragraph color={theme.color12.val}>{`by ${post?.author}`}</Paragraph>
+        </Card.Header>
+        <Card.Background backgroundColor={theme.color6.val} borderRadius="$6">
+          <ZStack>
+            <SolitoImage
+              src={post?.image}
+              height={minHeight}
+              alt='Project Logo'
+              resizeMode={"cover"}
+            />
+            <LinearGradient
+              height={minHeight}
+              borderRadius="$4"
+              colors={[theme.color3.val, theme.backgroundTransparent.val]}
+              start={[0, 0]}
+              end={[0, 1]}
+              locations={[0, 0.75]}
+            />
+          </ZStack>
+        </Card.Background>
+      </Card>
     </TouchableOpacity>
   );
 };

@@ -4,6 +4,7 @@ import { PostScreen } from "app/features/posts/screen";
 import React, { useEffect, useRef, useState } from "react";
 import { CoverScrollView } from "@t4/ui/src/components/templates/CoverScrollView/CoverScrollView";
 import { Animated } from "react-native";
+import { useTheme } from '@t4/ui/src';
 
 const {useParam} = createParam<{ id: string }>()
 
@@ -19,7 +20,9 @@ export default function Screen() {
     image: "https://picsum.photos/320/320?random=1"
   }
 
-  const headerColor = 'transparent' | "white";
+  const headerColor = 'transparent';
+
+  const theme = useTheme();
 
   return (
     <>
@@ -28,7 +31,7 @@ export default function Screen() {
           title: "",
           headerShown: true,
           headerBackTitle: "Back",
-          headerTintColor: "black",
+          headerTintColor: theme.color12.val,
           headerStyle: {
             backgroundColor: headerColor,
           },
@@ -37,7 +40,6 @@ export default function Screen() {
       />
       <CoverScrollView
         title={post?.title}
-        description={""}
         imageSrc={"https://picsum.photos/320/320?random=1"}
       >
         <PostScreen post={post}/>

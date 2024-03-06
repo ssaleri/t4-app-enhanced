@@ -10,10 +10,7 @@ import { useSheetOpen } from "app/atoms/sheet";
 import { ChevronDown } from "@tamagui/lucide-icons";
 
 export function AboutScreen() {
-  const utils = trpc.useContext()
-  const supabase = useSupabase()
   const toast = useToastController()
-
 
   const dataFetchingLink = useLink({
     href: '/data-fetching',

@@ -96,9 +96,10 @@ export default function Screen() {
     <>
       <CoverList
         title={"Blog"}
-        description={"Cool tech news"}
         data={posts.data}
         renderItem={({item}) => <Post post={item}/>}
+        colorFrom={"$blue8"}
+        colorTo={"$color3"}
       />
     </>
   )

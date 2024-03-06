@@ -12,7 +12,8 @@ export default function Screen() {
   return (
     <CoverScrollView
       title={"About"}
-      imageSrc={"https://picsum.photos/320/320?random=1"}
+      colorFrom={"$pink8"}
+      colorTo={"$color3"}
     >
       <AboutScreen/>
     </CoverScrollView>

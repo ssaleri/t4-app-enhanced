@@ -5,6 +5,8 @@ import { SolitoImage } from 'solito/image'
 import { useLink } from 'solito/link';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDeviceMedia } from "app/hooks/useDeviceMedia";
+import { Appearance } from 'react-native'
+
 
 const frameworks = [
   {label: 'React Native', gradientDirection: "0deg", fromGradientColor: "var(--blue9)", toGradientColor: "var(--red9)"},
@@ -32,6 +34,9 @@ export function HomeScreen() {
     return () => clearInterval(interval);
   }, [frameworks.length]);
 
+  const colorScheme = Appearance.getColorScheme()
+  const toggleTheme = () => Appearance.setColorScheme(colorScheme === 'dark' ? 'light' : 'dark')
+
   return (
     <SafeAreaView flex={1}>
       <YStack flex={11} ai='center' space='$4' px='$4' pt={"$10"} pb={"$6"}>
@@ -51,7 +56,10 @@ export function HomeScreen() {
         </Paragraph>
       </YStack>
       <YStack flex={1} jc='center' ai='center' space='$4' px='$4' py={"$5"}>
-        <Button themeInverse {...blogLink} alignSelf="center" br="$5" size="$5" width={isDesktopWeb ? undefined : "100%"}>Jump in</Button>
+        <Button themeInverse {...blogLink} alignSelf="center" br="$5" size="$5"
+                width={isDesktopWeb ? undefined : "100%"}>Jump in</Button>
+        <Button onPress={toggleTheme} alignSelf="center" br="$5" size="$5" width={isDesktopWeb ? undefined : "100%"}>Toggle
+          Theme</Button>
       </YStack>
     </SafeAreaView>
   )

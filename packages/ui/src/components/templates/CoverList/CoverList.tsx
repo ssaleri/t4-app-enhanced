@@ -1,21 +1,21 @@
 import { Animated, Dimensions, FlatList, StyleSheet, View } from "react-native";
-import { Text, XStack, YStack } from "../../../index";
+import { XStack, YStack } from "../../../index";
 import React, { useEffect, useRef, useState } from "react";
-import { SolitoImage } from "solito/image";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { H1 } from "@t4/ui";
-import { useHeaderHeight } from "@react-navigation/elements";
+import { LinearGradient } from 'tamagui/linear-gradient'
+import { H3, H6, useTheme } from "tamagui";
 
-export const CoverList = ({title, description, data, renderItem}) => {
+export const CoverList = ({title, colorFrom, colorTo, data, renderItem}) => {
+  const theme = useTheme();
   const insets = useSafeAreaInsets()
   const windowHeight = Dimensions.get('window').height;
+  const windowWidth = Dimensions.get('window').width;
   const oneThirdHeight = windowHeight / 4;
 
   const [headerShown, setHeaderShown] = useState(false);
   const translation = useRef(new Animated.Value(-100)).current;
   const headerHeight = insets.top;
-
-  console.log(headerHeight);
 
   useEffect(() => {
     Animated.timing(translation, {
@@ -28,19 +28,20 @@ export const CoverList = ({title, description, data, renderItem}) => {
   return (
     <>
       <Animated.View
-        style={stylesWithParams({headerHeight, translation}).animatedHeader}
+        style={stylesWithParams({headerHeight, translation, theme}).animatedHeader}
       />
 
       <View style={styles.headerSection}>
-        <SolitoImage
-          src={"https://picsum.photos/1024/400?random=2"}
-          height={400}
-          alt='Project Logo'
-          resizeMode={"cover"}
-          style={stylesWithParams({insets}).headerImage}
+        <LinearGradient
+          width={windowWidth}
+          height={windowHeight}
+          borderRadius="$4"
+          colors={[colorFrom, colorTo]}
+          end={{ x: 0, y: 1 }}
+          start={{ x: 0, y: 0 }}
         />
         <View style={stylesWithParams({insets, oneThirdHeight}).headerTitle}>
-          <H1>{title}</H1>
+          {title?.length > 15 ? <H3 color={"$color6"}>{title}</H3> : <H1 color={"$color12"}>{title}</H1>}
         </View>
       </View>
       <FlatList
@@ -53,19 +54,20 @@ export const CoverList = ({title, description, data, renderItem}) => {
           }
         }}
         scrollEventThrottle={16}
+        ListHeaderComponent={<H6 textAlign={"center"} py={"$6"}>Tech news</H6>}
         ListFooterComponent={<YStack height={"$12"}/>}
-        contentContainerStyle={stylesWithParams({oneThirdHeight}).container}
+        contentContainerStyle={stylesWithParams({oneThirdHeight, theme}).container}
         data={data}
         renderItem={renderItem}
         keyExtractor={(item) => item.name}
-        ItemSeparatorComponent={<XStack mt={"$2"}/>}
+        ItemSeparatorComponent={<XStack mt={"$4"}/>}
       />
     </>
   )
 };
 
 const borderRadius = 16;
-const stylesWithParams = ({insets, oneThirdHeight, headerHeight, translation}) => StyleSheet.create({
+const stylesWithParams = ({insets, oneThirdHeight, headerHeight, translation, theme}) => StyleSheet.create({
   animatedHeader: {
     position: 'absolute',
     zIndex: 1,
@@ -73,7 +75,7 @@ const stylesWithParams = ({insets, oneThirdHeight, headerHeight, translation}) =
     left: 0,
     right: 0,
     height: headerHeight,
-    backgroundColor: 'white',
+    backgroundColor: theme?.color4?.val,
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(0,0,0,0.1)',
     opacity: translation?.interpolate({
@@ -96,7 +98,7 @@ const stylesWithParams = ({insets, oneThirdHeight, headerHeight, translation}) =
     paddingHorizontal: 16,
     paddingTop: 16,
     paddingBottom: 200,
-    backgroundColor: "white",
+    backgroundColor:  theme?.color3?.val,
     marginTop: oneThirdHeight - borderRadius,
     borderTopLeftRadius: borderRadius,
     borderTopRightRadius: borderRadius,

@@ -101,6 +101,8 @@ export const PortfolioScreen = () => {
         description={"Projects I have been involved in"}
         data={experiences.projects}
         renderItem={({item}) => <Project project={item}/>}
+        colorFrom={"$green8"}
+        colorTo={"$color3"}
       />
     </>
   )

@@ -3,8 +3,8 @@ import { ChevronLeft } from '@tamagui/lucide-icons'
 import { createParam } from 'solito'
 import { useRouter } from "solito/router";
 import React from "react";
-import { Dimensions, Platform } from "react-native";
-import { Input, TextArea, Label, H4, ScrollView } from "tamagui";
+import { Appearance, Dimensions, Platform } from "react-native";
+import { Input, TextArea, Label, H4, ScrollView, useTheme } from "tamagui";
 import { View, Alert, TouchableWithoutFeedback, Keyboard, KeyboardAvoidingView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -13,29 +13,28 @@ const {useParam} = createParam<{ id: string }>()
 export const SendMessageScreen = (): React.ReactNode => {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const colorScheme = Appearance.getColorScheme();
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={{flex: 1, paddingHorizontal: 16, width: "100%"}}>
+      <ScrollView style={{flex: 1, paddingHorizontal: 16, width: "100%"}}>
         <View style={{flex: 1, marginBottom: insets.bottom}} gap={16}>
           <H4>Send me a message</H4>
 
           <Label htmlFor="name" pointerEvents={"none"}>
             Full Name
           </Label>
-          <Input placeholder="John Doe" autoComplete={"off"} autoCorrect={false} />
+          <Input placeholder="John Doe" autoComplete={"off"} autoCorrect={false} keyboardAppearance={colorScheme} />
 
           <Label htmlFor="name" pointerEvents={"none"}>
             Your email
           </Label>
-          <Input placeholder="Enter your email to get an answer"/>
+          <Input placeholder="Enter your email to get an answer" keyboardAppearance={colorScheme}/>
 
           <Label htmlFor="name" pointerEvents={"none"}>
             Your message
           </Label>
-          <TextArea size="$4" placeholder="Enter your message..."/>
+          <TextArea size="$4" placeholder="Enter your message..." keyboardAppearance={colorScheme}/>
 
           <View style={{flex: 1, justifyContent: "flex-end"}}>
             <Button
@@ -50,7 +49,7 @@ export const SendMessageScreen = (): React.ReactNode => {
             </Button>
           </View>
         </View>
-      </KeyboardAvoidingView>
+      </ScrollView>
     </TouchableWithoutFeedback>
   )
 }
