@@ -45,15 +45,12 @@ export const CoverScrollView = ({title, children, imageSrc}) => {
       <ScrollView
         onScroll={(event) => {
           const scrolling = event.nativeEvent.contentOffset.y;
-          console.log(scrolling);
-
           if (scrolling > 100) {
             setHeaderShown(true);
           } else {
             setHeaderShown(false);
           }
         }}
-        // onScroll will be fired every 16ms
         scrollEventThrottle={16}
         /*ListFooterComponent={<YStack height={"$12"}/>}*/
         contentContainerStyle={stylesWithParams({oneThirdHeight}).container}
