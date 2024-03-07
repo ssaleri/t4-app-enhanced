@@ -42,7 +42,7 @@ export default function Screen() {
         }}
       />
       <CoverPage
-        title={post?.title}
+        title={project?.title}
         imageSrc={"https://picsum.photos/320/320?random=1"}
       >
         {(onScroll, styles) => (
