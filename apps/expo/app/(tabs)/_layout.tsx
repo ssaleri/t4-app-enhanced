@@ -22,7 +22,8 @@ export default function Layout() {
           tabBarStyle: {
             ...stylesWithInsets({insets, theme}).tabBar,
             ...styles.shadow
-          }
+          },
+          lazy: false,
         }}>
 
           <Tabs.Screen

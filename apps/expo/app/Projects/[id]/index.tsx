@@ -1,11 +1,9 @@
 import { Stack } from 'expo-router'
 import { createParam } from "solito";
-import { PostScreen } from "app/features/posts/screen";
 import { ProjectScreen } from "app/features/project/screen";
 import { CoverScrollView } from "@t4/ui/src/components/templates/CoverScrollView/CoverScrollView";
-import project from "@t4/ui/src/components/organisms/Project/Project";
-import { Animated } from "react-native";
-import { useRef } from "react";
+import { ScrollView } from "react-native";
+import { CoverPage } from "@t4/ui/src/components/templates/CoverPage/CoverPage";
 
 const {useParam} = createParam<{ id: string }>()
 
@@ -43,13 +41,19 @@ export default function Screen() {
           headerTransparent: true,
         }}
       />
-      <CoverScrollView
-        title={project?.title}
-        description={""}
+      <CoverPage
+        title={post?.title}
         imageSrc={"https://picsum.photos/320/320?random=1"}
       >
-        <ProjectScreen project={project} />
-      </CoverScrollView>
+        {(onScroll, styles) => (
+          <ScrollView
+            onScroll={onScroll}
+            scrollEventThrottle={16}
+            contentContainerStyle={styles}
+          >
+            <ProjectScreen project={project}/>
+          </ScrollView>)}
+      </CoverPage>
     </>
   )
 }

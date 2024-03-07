@@ -23,7 +23,7 @@ export function AboutScreen() {
   return (
     <>
         <H3 textAlign={"center"} py={"$6"}>🦮🐴 App Demos</H3>
-        <YStack space='$2'>
+        <YStack space='$2' paddingBottom={500}>
           <Button {...virtualizedListLink} space='$2'>
             Virtualized List
           </Button>

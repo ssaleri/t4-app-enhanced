@@ -47,7 +47,7 @@ const renderCover = ({colorFrom, colorTo, imageSrc, insets, windowWidth, windowH
 const renderTitle = (title: string) => (title?.length > 15 ? <H3 color={"white"}>{title}</H3> :
   <H1 color={"white"}>{title}</H1>);
 
-export const CoverScrollView = ({title, children, colorFrom, colorTo, imageSrc}) => {
+export const CoverPage = ({title, children, colorFrom, colorTo, imageSrc}) => {
   const insets = useSafeAreaInsets()
   const windowHeight = Dimensions.get('window').height;
   const windowWidth = Dimensions.get('window').width;
@@ -56,7 +56,16 @@ export const CoverScrollView = ({title, children, colorFrom, colorTo, imageSrc})
 
   const [headerShown, setHeaderShown] = useState(false);
   const translation = useRef(new Animated.Value(-100)).current;
-  const headerHeight = useHeaderHeight();
+  const headerHeight = useHeaderHeight() || insets.top;
+
+  const onScroll = (event) => {
+    const scrolling = event.nativeEvent.contentOffset.y;
+    if (scrolling > 100) {
+      setHeaderShown(true);
+    } else {
+      setHeaderShown(false);
+    }
+  }
 
   useEffect(() => {
     Animated.timing(translation, {
@@ -79,21 +88,9 @@ export const CoverScrollView = ({title, children, colorFrom, colorTo, imageSrc})
           {renderTitle(title)}
         </View>
       </View>
-      <ScrollView
-        onScroll={(event) => {
-          const scrolling = event.nativeEvent.contentOffset.y;
-          if (scrolling > 100) {
-            setHeaderShown(true);
-          } else {
-            setHeaderShown(false);
-          }
-        }}
-        scrollEventThrottle={16}
-        /*ListFooterComponent={<YStack height={"$12"}/>}*/
-        contentContainerStyle={stylesWithParams({oneThirdHeight, theme}).container}
-      >
-        {children}
-      </ScrollView>
+
+
+      {children(onScroll, stylesWithParams({oneThirdHeight, theme}).container)}
     </>
   )
 };
@@ -137,7 +134,6 @@ const stylesWithParams = ({insets, oneThirdHeight, headerHeight, translation, th
     minHeight: "100%",
   },
 });
-
 
 const styles = StyleSheet.create({
   headerSection: {

@@ -4,6 +4,11 @@ import React from "react";
 import Post from "@t4/ui/src/components/organisms/Post/Post";
 import { CoverList } from "@t4/ui/src/components/templates/CoverList/CoverList";
 import { trpc } from "app/utils/trpc";
+import { FlatList, ScrollView } from "react-native";
+import { AboutScreen } from "app/features/about/screen";
+import { CoverPage } from "@t4/ui/src/components/templates/CoverPage/CoverPage";
+import { H6 } from "tamagui";
+import { XStack, YStack } from "@t4/ui/src";
 
 const posts = {
   data: [
@@ -94,13 +99,24 @@ export default function Screen() {
 
   return (
     <>
-      <CoverList
+      <CoverPage
         title={"Blog"}
-        data={posts.data}
-        renderItem={({item}) => <Post post={item}/>}
         colorFrom={"$blue8"}
         colorTo={"$color3"}
-      />
+      >{(onScroll, styles) => (
+        <FlatList
+          onScroll={onScroll}
+          scrollEventThrottle={16}
+          ListHeaderComponent={<H6 textAlign={"center"} py={"$6"}>Tech news</H6>}
+          ListFooterComponent={<YStack height={"$12"}/>}
+          contentContainerStyle={styles}
+          data={posts.data}
+          renderItem={({item}) => <Post post={item}/>}
+          keyExtractor={(item) => item.id}
+          ItemSeparatorComponent={<XStack mt={"$4"}/>}
+        />
+      )}
+      </CoverPage>
     </>
   )
 }
