@@ -5,10 +5,12 @@
   "version": "3.0.0",
   "scripts": {
     "dev": "run-p api web",
+    "remote": "run-p apiRemote web",
     "ios": "cd apps/expo && bun ios",
     "android": "cd apps/expo && bun android",
     "web": "cd apps/next && bun dev",
     "api": "cd packages/api && bun dev",
+    "apiRemote": "cd packages/api && bun remote",
     "generate": "cd packages/api && bun generate",
     "migrate:local": "cd packages/api && bun migrate:local",
     "seed:local": "cd packages/api && bun seed:local",

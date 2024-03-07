@@ -20,12 +20,12 @@ export const PostScreen = ({post}): React.ReactNode => {
   return (
       <YStack flex={1} space={"$2"} p={"$4"}>
         <XStack justifyContent={"space-between"} space={"$2"}>
-          <Paragraph textAlign='center' fontWeight='500' color={theme?.color12?.val}><Ionicons size={16} name={"person-circle"}/> {post.author}</Paragraph>
-          <Paragraph textAlign='center' fontWeight='500' color={theme?.color12?.val}><Ionicons size={16} name={"calendar-outline"}/> {post.date}</Paragraph>
+          <Paragraph textAlign='center' fontWeight='500' color={theme?.color12?.val}><Ionicons size={16} name={"person-circle"}/> {post?.author}</Paragraph>
+          <Paragraph textAlign='center' fontWeight='500' color={theme?.color12?.val}><Ionicons size={16} name={"calendar-outline"}/> {post?.date}</Paragraph>
         </XStack>
 
         <Paragraph textAlign='left' space='$4' marginVertical={"$6"}>
-          {post.body}
+          {post?.content}
         </Paragraph>
 
 

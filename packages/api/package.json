@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "wrangler dev --ip 0.0.0.0",
+    "remote": "wrangler dev --remote --ip 0.0.0.0",
     "generate": "drizzle-kit generate:sqlite --schema=./src/db/schema.ts --out=./migrations",
     "migrate": "wrangler d1 migrations apply production",
     "migrate:local": "wrangler d1 migrations apply production --local",

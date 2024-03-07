@@ -6,20 +6,18 @@ import { CoverScrollView } from "@t4/ui/src/components/templates/CoverScrollView
 import { Animated, ScrollView } from "react-native";
 import { useTheme } from '@t4/ui/src';
 import { CoverPage } from "@t4/ui/src/components/templates/CoverPage/CoverPage";
+import { trpc } from "app/utils/trpc";
 
 const {useParam} = createParam<{ id: string }>()
 
 export default function Screen() {
 
   const [id] = useParam('id')
-  const post = {
-    id: id,
-    title: 'Post Title',
-    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nec ex nec libero tincidunt fermentum',
-    author: "Simone Saleri",
-    date: "2021-10-10",
-    image: "https://picsum.photos/320/320?random=1"
-  }
+
+  console.log(id);
+
+  const response = trpc.blogPosts.byId.useQuery({id: id});
+  const post = response?.data;
 
   const headerColor = 'transparent';
 
@@ -41,7 +39,7 @@ export default function Screen() {
       />
       <CoverPage
         title={post?.title}
-        imageSrc={"https://picsum.photos/320/320?random=1"}
+        imageSrc={post?.image}
       >
         {(onScroll, styles) => (
           <ScrollView

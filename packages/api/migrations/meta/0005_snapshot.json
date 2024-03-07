@@ -1,9 +1,69 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "3764075e-922c-4622-982a-d66b485fd99e",
-  "prevId": "d9de966a-e876-4754-8477-1651def25dfa",
+  "id": "ab0c00d3-a5bb-42e3-b80a-4e628c8e9f13",
+  "prevId": "3764075e-922c-4622-982a-d66b485fd99e",
   "tables": {
+    "BlogPost": {
+      "name": "BlogPost",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "content": {
+          "name": "content",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "author": {
+          "name": "author",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'Simone Saleri'"
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "date": {
+          "name": "date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "CURRENT_DATE"
+        },
+        "tags": {
+          "name": "tags",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "Car": {
       "name": "Car",
       "columns": {

@@ -6,6 +6,7 @@ import { useDeviceMedia } from "app/hooks/useDeviceMedia";
 import { useLink } from "solito/link";
 import { Button, H2, useTheme, ZStack } from "tamagui";
 import { LinearGradient } from "tamagui/linear-gradient";
+import { BlogPost } from "@t4/api/src/db/tables/BlogPost";
 
 const shadow = {
   shadowColor: "#000000",
@@ -17,7 +18,7 @@ const shadow = {
   shadowRadius: 3,
   elevation: 5,
 };
-const Post = ({post}: { post: Object }) => {
+const Post = ({post}: { post: BlogPost }) => {
   const theme = useTheme();
   const minHeight = 212;
 

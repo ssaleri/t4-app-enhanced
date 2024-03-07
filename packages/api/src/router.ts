@@ -4,6 +4,7 @@ import { helloRouter } from './routes/hello'
 import { personsRouter } from './routes/persons'
 import { upsRouter } from './routes/ups'
 import { userRouter } from './routes/user'
+import { blogPostsRouter } from './routes/blogPosts'
 import { router } from './trpc'
 
 export const appRouter = router({
@@ -13,6 +14,7 @@ export const appRouter = router({
   car: carsRouter,
   ups: upsRouter,
   person: personsRouter,
+  blogPosts: blogPostsRouter,
 })
 
 export type AppRouter = typeof appRouter

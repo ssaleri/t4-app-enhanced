@@ -1,14 +1,14 @@
-import { UpsScreen } from 'app/features/ups/screen'
-import { Stack } from 'expo-router'
 import React from "react";
 import Post from "@t4/ui/src/components/organisms/Post/Post";
-import { CoverList } from "@t4/ui/src/components/templates/CoverList/CoverList";
-import { trpc } from "app/utils/trpc";
-import { FlatList, ScrollView } from "react-native";
-import { AboutScreen } from "app/features/about/screen";
+import { ActivityIndicator, FlatList, View } from "react-native";
 import { CoverPage } from "@t4/ui/src/components/templates/CoverPage/CoverPage";
 import { H6 } from "tamagui";
-import { XStack, YStack } from "@t4/ui/src";
+import { Paragraph, Spinner, VirtualList, XStack, YStack } from "@t4/ui/src";
+import { trpc } from "app/utils/trpc";
+import { match } from "ts-pattern";
+import { empty, error, loading, success } from "app/utils/trpc/patterns";
+import { CarListError } from "@t4/ui/src/cars/CarListError";
+import { CarListItem } from "@t4/ui/src/cars/CarListItem";
 
 const posts = {
   data: [
@@ -19,6 +19,7 @@ const posts = {
       author: "Simone Saleri",
       image: "https://picsum.photos/320/320?random=1",
       date: "2021-01-01",
+      tags: ["tech", "future", "react", "react native", "developer tools"],
     },
     {
       id: 2,
@@ -27,6 +28,7 @@ const posts = {
       author: "Simone Saleri",
       image: "https://picsum.photos/320/320?random=2",
       date: "2021-01-01",
+      tags: ["tech", "future", "react", "react native", "developer tools"],
     },
     {
       id: 3,
@@ -35,6 +37,7 @@ const posts = {
       author: "Simone Saleri",
       image: "https://picsum.photos/320/320?random=3",
       date: "2021-01-01",
+      tags: ["tech", "future", "react", "react native", "developer tools"],
     },
     {
       id: 4,
@@ -43,6 +46,7 @@ const posts = {
       author: "Simone Saleri",
       image: "https://picsum.photos/320/320?random=4",
       date: "2021-01-01",
+      tags: ["tech", "future", "react", "react native", "developer tools"],
     },
     {
       id: 5,
@@ -51,6 +55,7 @@ const posts = {
       author: "Simone Saleri",
       image: "https://picsum.photos/320/320?random=5",
       date: "2021-01-01",
+      tags: ["tech", "future", "react", "react native", "developer tools"],
     },
     {
       id: 6,
@@ -59,6 +64,7 @@ const posts = {
       author: "Simone Saleri",
       image: "https://picsum.photos/320/320?random=6",
       date: "2021-01-01",
+      tags: ["tech", "future", "react", "react native", "developer tools"],
     },
     {
       id: 7,
@@ -67,6 +73,7 @@ const posts = {
       author: "Simone Saleri",
       image: "https://picsum.photos/320/320?random=7",
       date: "2021-01-01",
+      tags: ["tech", "future", "react", "react native", "developer tools"],
     },
     {
       id: 8,
@@ -75,6 +82,7 @@ const posts = {
       author: "Simone Saleri",
       image: "https://picsum.photos/320/320?random=8",
       date: "2021-01-01",
+      tags: ["tech", "future", "react", "react native", "developer tools"],
     },
     {
       id: 9,
@@ -83,6 +91,7 @@ const posts = {
       author: "Simone Saleri",
       image: "https://picsum.photos/320/320?random=9",
       date: "2021-01-01",
+      tags: ["tech", "future", "react", "react native", "developer tools"],
     },
     {
       id: 10,
@@ -91,11 +100,20 @@ const posts = {
       author: "Simone Saleri",
       image: "https://picsum.photos/320/320?random=10",
       date: "2021-01-01",
+      tags: ["tech", "future", "react", "react native", "developer tools"],
     },
   ]
 };
 export default function Screen() {
-  //const upsList = trpc.ups.all.useQuery()
+  const blogPostList = trpc.blogPosts.all.useQuery()
+
+  const blogPostListLayout = (onScroll, styles) => match(blogPostList)
+    .with(error, () => <CarListError message={blogPostList.failureReason?.message}/>)
+    .with(loading, () => (
+        <ActivityIndicator animating/>
+    ))
+    .with(empty, () => <Paragraph>No blog posts found.</Paragraph>)
+    .otherwise(() => <CarListError message={blogPostList.failureReason?.message}/>)
 
   return (
     <>
@@ -106,11 +124,12 @@ export default function Screen() {
       >{(onScroll, styles) => (
         <FlatList
           onScroll={onScroll}
+          ListEmptyComponent={blogPostListLayout}
           scrollEventThrottle={16}
           ListHeaderComponent={<H6 textAlign={"center"} py={"$6"}>Tech news</H6>}
           ListFooterComponent={<YStack height={"$12"}/>}
           contentContainerStyle={styles}
-          data={posts.data}
+          data={blogPostList?.data}
           renderItem={({item}) => <Post post={item}/>}
           keyExtractor={(item) => item.id}
           ItemSeparatorComponent={<XStack mt={"$4"}/>}
