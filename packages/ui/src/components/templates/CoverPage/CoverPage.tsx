@@ -1,11 +1,12 @@
 import { Animated, Dimensions, StyleSheet, View } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { H3, ScrollView, useTheme, ZStack } from "tamagui";
+import { H3, useTheme, ZStack } from "tamagui";
 import { useHeaderHeight } from '@react-navigation/elements';
 import { H1 } from "@t4/ui";
 import { LinearGradient } from 'tamagui/linear-gradient';
 import { SolitoImage } from "solito/image";
+import { CoverPageType } from "app/models/CoverPage";
 
 const renderCover = ({colorFrom, colorTo, imageSrc, insets, windowWidth, windowHeight, theme}) => {
   return (
@@ -14,7 +15,6 @@ const renderCover = ({colorFrom, colorTo, imageSrc, insets, windowWidth, windowH
         <LinearGradient
           width={windowWidth}
           height={windowHeight}
-          borderRadius="$4"
           colors={[colorFrom, colorTo]}
           start={[0, 0]}
           end={[0, 1]}
@@ -27,16 +27,15 @@ const renderCover = ({colorFrom, colorTo, imageSrc, insets, windowWidth, windowH
             height={400}
             alt='Project Logo'
             resizeMode={"cover"}
-            style={stylesWithParams({insets}).headerImage}
+            style={stylesWithParams(insets).headerImage}
           />
           <LinearGradient
             width={windowWidth}
             height={windowHeight}
-            borderRadius="$4"
-            colors={[theme.color3.val, theme.backgroundTransparent.val]}
+            colors={[theme.color6.val, theme.backgroundTransparent.val]}
             start={[0, 0]}
             end={[0, 1]}
-            locations={[0, 0.3]}
+            locations={[0, 0.25]}
           />
         </ZStack>
       )}
@@ -47,7 +46,7 @@ const renderCover = ({colorFrom, colorTo, imageSrc, insets, windowWidth, windowH
 const renderTitle = (title: string) => (title?.length > 15 ? <H3 color={"white"}>{title}</H3> :
   <H1 color={"white"}>{title}</H1>);
 
-export const CoverPage = ({title, children, colorFrom, colorTo, imageSrc}) => {
+export const CoverPage = ({title, children, colorFrom, colorTo, imageSrc} : CoverPageType) => {
   const insets = useSafeAreaInsets()
   const windowHeight = Dimensions.get('window').height;
   const windowWidth = Dimensions.get('window').width;
@@ -56,7 +55,7 @@ export const CoverPage = ({title, children, colorFrom, colorTo, imageSrc}) => {
 
   const [headerShown, setHeaderShown] = useState(false);
   const translation = useRef(new Animated.Value(-100)).current;
-  const headerHeight = useHeaderHeight() || insets.top;
+  const headerHeight = useHeaderHeight() || insets?.top || 0;
 
   const onScroll = (event) => {
     const scrolling = event.nativeEvent.contentOffset.y;
@@ -75,22 +74,24 @@ export const CoverPage = ({title, children, colorFrom, colorTo, imageSrc}) => {
     }).start();
   }, [headerShown]);
 
+  const params = {insets, oneThirdHeight, headerHeight, translation, theme};
+
   return (
     <>
       <Animated.View
-        style={stylesWithParams({headerHeight, translation, theme}).animatedHeader}
+        style={stylesWithParams(params).animatedHeader}
       />
 
       <View style={styles.headerSection}>
         {renderCover({colorFrom, colorTo, imageSrc, insets, windowWidth, windowHeight, theme})}
 
-        <View style={stylesWithParams({insets, oneThirdHeight, headerHeight, theme}).headerTitle}>
+        <View style={stylesWithParams(params).headerTitle}>
           {renderTitle(title)}
         </View>
       </View>
 
 
-      {children(onScroll, stylesWithParams({oneThirdHeight, theme}).container)}
+      {children(onScroll, stylesWithParams(params).container)}
     </>
   )
 };

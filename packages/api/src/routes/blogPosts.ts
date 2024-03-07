@@ -14,7 +14,6 @@ export const blogPostsRouter = router({
       id: z.string(),
     }),
   ).query(async ({ctx, input}) => {
-    console.log("input: ", input);
     const { id } = input;
     const { db } = ctx;
     const blogPost = await db.select().from(BlogPostTable).where(eq(BlogPostTable.id, id)).get();
