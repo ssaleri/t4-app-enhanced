@@ -8,6 +8,7 @@ import { useUser } from "app/utils/supabase/hooks/useUser";
 import { useLink } from "solito/link";
 import { supabase } from "app/utils/supabase/client";
 import Section from "@t4/ui/src/components/organisms/Section/Section";
+import { H5 } from "tamagui";
 
 export function DataFetchingScreen() {
   const {user} = useUser()
@@ -35,7 +36,7 @@ export function DataFetchingScreen() {
 
   return (
     <ScrollView contentContainerStyle={{alignItems: "center"}}>
-      <H4 alignSelf={"left"} textAlign={"left"} marginVertical={'$2'}>Useful resources to logged users</H4>
+      <H5 textAlign={"center"} marginVertical={'$2'}>Useful resources to logged users</H5>
       <H2>Public Route</H2>
       {helloWorldLayout}
       <H2>Protected Route</H2>
