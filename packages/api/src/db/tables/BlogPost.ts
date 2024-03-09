@@ -1,7 +1,7 @@
 import { InferInsertModel, InferSelectModel } from 'drizzle-orm'
 import { createInsertSchema, createSelectSchema } from 'drizzle-valibot'
-import { sql } from "drizzle-orm/sql/sql";
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { sql } from 'drizzle-orm/sql/sql'
+import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core'
 
 export const BlogPostTable = sqliteTable('BlogPost', {
   id: integer('id').primaryKey(),

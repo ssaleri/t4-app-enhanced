@@ -7,7 +7,7 @@ export default function Page() {
         <title>Portfolio</title>
       </Head>
 
-      <PortfolioScreen/>
+      <PortfolioScreen />
     </>
   )
 }

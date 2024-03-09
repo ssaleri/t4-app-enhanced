@@ -5,7 +5,7 @@ import { trpc } from 'app/utils/trpc'
 import { empty, error, loading, success } from 'app/utils/trpc/patterns'
 import React from 'react'
 import { match } from 'ts-pattern'
-import Section from "@t4/ui/src/components/organisms/Section/Section";
+import Section from '@t4/ui/src/components/organisms/Section/Section'
 
 export const UpsScreen = (): React.ReactNode => {
   const upsList = trpc.ups.all.useQuery()
@@ -24,7 +24,7 @@ export const UpsScreen = (): React.ReactNode => {
     .otherwise(() => <UpsListError message={upsList.failureReason?.message} />)
 
   return (
-    <ScrollView contentContainerStyle={{paddingHorizontal: 0}}>
+    <ScrollView contentContainerStyle={{ paddingHorizontal: 0 }}>
       <Section>
         <Section.Title>Blog</Section.Title>
         <Section.Description>Tech related stuff</Section.Description>

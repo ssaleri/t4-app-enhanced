@@ -8,7 +8,7 @@ export default function Page() {
         <title>Home</title>
       </Head>
 
-      <HomeScreen/>
+      <HomeScreen />
     </>
   )
 }
