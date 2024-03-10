@@ -1,13 +1,14 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import { H1, H4, Separator } from '@t4/ui'
+import { H1, H2, H4, Separator } from '@t4/ui'
+import { H5, H6, YStack } from "tamagui";
 
-const Section = ({ children }) => {
-  return <View>{children}</View>
+const Section = ({ children, ...props }) => {
+  return <YStack {...props}>{children}</YStack>
 }
 
-const SectionTitle = ({ children }) => {
-  return <H1 textAlign={'center'}>{children}</H1>
+const SectionTitle = ({children, ...props }) => {
+  return <H6 {...props}>{children}</H6>
 }
 
 const SectionDescription = ({ children }) => {
