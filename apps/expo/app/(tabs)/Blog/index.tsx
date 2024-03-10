@@ -1,5 +1,5 @@
 import React from 'react'
-import Post from '@t4/ui/src/components/organisms/Post/Post'
+import Card from '@t4/ui/src/components/organisms/Card/Card'
 import { ActivityIndicator, FlatList } from 'react-native'
 import { CoverPage } from '@t4/ui/src/components/templates/CoverPage/CoverPage'
 import { H6, Paragraph, XStack, YStack } from '@t4/ui'
@@ -7,6 +7,7 @@ import { trpc } from 'app/utils/trpc'
 import { match } from 'ts-pattern'
 import { empty, error, loading } from 'app/utils/trpc/patterns'
 import { GenericError } from '@t4/ui/src/components/molecules/GenericError/GenericError'
+import { List } from "@t4/ui/src/components/organisms/List/List";
 
 export default function Screen() {
   const blogPostList = trpc.blogPosts.all.useQuery()
@@ -22,22 +23,7 @@ export default function Screen() {
     <>
       <CoverPage title={'Blog'} colorFrom={'$blue8'} colorTo={'$color3'}>
         {(onScroll, styles) => (
-          <FlatList
-            onScroll={onScroll}
-            ListEmptyComponent={blogPostListLayout}
-            scrollEventThrottle={16}
-            ListHeaderComponent={
-              <H6 textAlign={'center'} py={'$6'}>
-                Tech news
-              </H6>
-            }
-            ListFooterComponent={<YStack height={'$12'} />}
-            contentContainerStyle={styles}
-            data={blogPostList?.data}
-            renderItem={({ item }) => <Post post={item} />}
-            keyExtractor={(item) => item.id.toString()}
-            ItemSeparatorComponent={() => <XStack mt={'$4'} />}
-          />
+          <List onScroll={onScroll} styles={styles} data={blogPostList?.data} title="Tech news" ListEmptyComponent={blogPostListLayout}/>
         )}
       </CoverPage>
     </>

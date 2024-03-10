@@ -17,6 +17,7 @@ export default function Screen() {
   const [id = ''] = useParam('id')
   const response = trpc.blogPosts.byId.useQuery({ id: id })
   const post = response.data || ({} as BlogPost)
+  const theme = useTheme()
 
   const postLayout = match(response)
     .with(error, () => <GenericError message={response.failureReason?.message} />)
@@ -24,8 +25,6 @@ export default function Screen() {
     .with(empty, () => <Paragraph>No blog posts found.</Paragraph>)
     .with(success, () => <PostScreen post={post} />)
     .otherwise(() => <GenericError message={response.failureReason?.message} />)
-
-  const theme = useTheme()
 
   return (
     <>

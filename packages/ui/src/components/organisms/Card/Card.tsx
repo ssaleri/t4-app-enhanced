@@ -1,7 +1,7 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
 import { SolitoImage } from 'solito/image'
-import { Card, H2, useTheme } from '@t4/ui'
+import { Card as TamaguiCard, H2, useTheme } from '@t4/ui'
 import { useLink } from 'solito/link'
 import { LinearGradient } from 'tamagui/linear-gradient'
 import { BlogPost } from '@t4/api/src/db/tables/BlogPost'
@@ -18,17 +18,17 @@ const shadow = {
   shadowRadius: 3,
   elevation: 5,
 }
-const Post = ({ post }: { post: BlogPost }) => {
+const Card = ({ item }: { item: BlogPost }) => {
   const theme = useTheme()
   const minHeight = 212
 
   const postLink = useLink({
-    href: `/Posts/${post?.id}`,
+    href: `/Posts/${item?.id}`,
   })
 
   return (
     <TouchableOpacity {...postLink}>
-      <Card
+      <TamaguiCard
         {...shadow}
         size='$4'
         bordered
@@ -36,32 +36,32 @@ const Post = ({ post }: { post: BlogPost }) => {
         borderColor={'$gray6'}
         minHeight={minHeight}
       >
-        <Card.Header padded>
-          <H2 color={theme.gray12.val}>{post?.title}</H2>
+        <TamaguiCard.Header padded>
+          <H2 color={theme.gray12.val}>{item?.title}</H2>
           <IconLabel
             icon={<Ionicons size={16} name={'person-circle'} />}
-            label={post.author}
+            label={item?.author}
             color={theme.gray12.val}
           />
           <IconLabel
             icon={<Ionicons size={16} name={'calendar-outline'} />}
-            label={post.date}
+            label={item?.date}
             color={theme.gray12.val}
           />
-        </Card.Header>
-        <Card.Background backgroundColor={theme.color6.val} borderRadius='$6'>
-          <SolitoImage src={post.image} fill alt='Project Logo' resizeMode={'cover'} />
+        </TamaguiCard.Header>
+        <TamaguiCard.Background backgroundColor={theme.color6.val} borderRadius='$6'>
+          <SolitoImage src={item?.image} fill alt='Project Logo' resizeMode={'cover'} />
           <LinearGradient
             height={minHeight}
             borderRadius='$4'
-            colors={[theme.gray6.val, theme.backgroundTransparent.val]}
+            colors={[theme.gray8.val, theme.backgroundTransparent.val]}
             start={[0, 0]}
-            end={[1, 0]}
-            locations={[0, 0.95, 1]}
+            end={[1, 1]}
+            locations={[0, 1]}
           />
-        </Card.Background>
-      </Card>
+        </TamaguiCard.Background>
+      </TamaguiCard>
     </TouchableOpacity>
   )
 }
-export default Post
+export default Card

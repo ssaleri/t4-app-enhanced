@@ -60,7 +60,7 @@ export function HomeScreen() {
     <SafeAreaView flex={1}>
       <YStack flex={11} ai='center' space='$4' px='$4' pt={'$10'} pb={'$6'}>
         <SolitoImage src='/t4-logo.png' width={128} height={128} alt='T4 Logo' />
-        <H1 textAlign='center'>👋 simone.dev</H1>
+        <H1 textAlign='center'>👋 simonesaleri.dev</H1>
         <Separator />
         <Paragraph size={'$7'}>
           Cross-platform applications made with
