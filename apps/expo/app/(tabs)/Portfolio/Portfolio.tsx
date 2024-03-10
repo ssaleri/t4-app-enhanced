@@ -6,6 +6,7 @@ import React from 'react'
 import Project from '@t4/ui/src/components/organisms/Project/Project'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
 import Fontisto from 'react-native-vector-icons/Fontisto'
+import Card from "@t4/ui/src/components/organisms/Card/Card";
 
 const iconColor = '#484848'
 const iconDimension = 24
@@ -17,63 +18,66 @@ const experiences = {
     {
       id: '5',
       name: 'B*******',
+      title: 'Luxury Watch Faces',
+      image: 'https://picsum.photos/320/320?random=1',
       role: 'Mobile Software Engineer',
       startYear: '2023',
       endYear: 'current',
       description:
         'I worked as a software engineer at B*******. I was responsible for developing mobile applications for iOS and WatchOS.',
-      shortDescription: 'Luxury Watch Faces',
       technologies: (
         <>
-          <MaterialCommunityIcons name='react' size={iconDimension} color={iconColor} />
+          <MaterialCommunityIcons name='react' size={iconDimension} color={iconColor}/>
           <MaterialCommunityIcons
             name={'language-typescript'}
             size={iconDimension}
             color={iconColor}
           />
-          <MaterialCommunityIcons name='language-swift' size={iconDimension} color={iconColor} />
+          <MaterialCommunityIcons name='language-swift' size={iconDimension} color={iconColor}/>
         </>
       ),
     },
     {
       id: '4',
       name: 'S*********',
+      title: 'Electrical Maintenance',
+      image: 'https://picsum.photos/320/320?random=2',
       role: 'Mobile Software Engineer',
       startYear: '2023',
       endYear: 'current',
       description:
         'I worked as a software engineer at S*********. I was responsible for developing mobile applications for iOS and WatchOS.',
-      shortDescription: 'Electrical Maintenance',
       technologies: (
         <>
-          <MaterialCommunityIcons name='react' size={iconDimension} color={iconColor} />
+          <MaterialCommunityIcons name='react' size={iconDimension} color={iconColor}/>
           <MaterialCommunityIcons
             name={'language-typescript'}
             size={iconDimension}
             color={iconColor}
           />
-          <MaterialCommunityIcons name='android' size={iconDimension} color={iconColor} />
+          <MaterialCommunityIcons name='android' size={iconDimension} color={iconColor}/>
         </>
       ),
     },
     {
       id: '3',
       name: 'D**********',
+      title: 'Ho.Re.Ca. Supply Delivery',
+      image: 'https://picsum.photos/320/320?random=3',
       role: 'Mobile Software Engineer',
       startYear: '2021',
       endYear: '2023',
       description:
         'I worked as a software engineer at D**********. I was in close relationship with Design Team and I had been responsible for developing mobile applications for iOS and Android.',
-      shortDescription: 'Ho.Re.Ca. Supply Delivery',
       technologies: (
         <>
-          <MaterialCommunityIcons name='react' size={iconDimension} color={iconColor} />
+          <MaterialCommunityIcons name='react' size={iconDimension} color={iconColor}/>
           <MaterialCommunityIcons
             name={'language-typescript'}
             size={iconDimension}
             color={iconColor}
           />
-          <Fontisto name='redux' size={iconDimensionLittle} color={iconColor} />
+          <Fontisto name='redux' size={iconDimensionLittle} color={iconColor}/>
         </>
       ),
     },
@@ -81,14 +85,15 @@ const experiences = {
       id: '2',
       name: 'S*********',
       role: 'Mobile Software Engineer',
+      image: 'https://picsum.photos/320/320?random=4',
       startYear: '2019',
       endYear: '2020',
       description:
         'I worked as a software engineer at S*********. I was in close relationship with Design Team and I had been responsible for developing mobile applications for iOS and Android.',
-      shortDescription: 'Micro-mobility Gamification',
+      title: 'Micro-mobility Gamification',
       technologies: (
         <>
-          <MaterialCommunityIcons name='react' size={iconDimension} color={iconColor} />
+          <MaterialCommunityIcons name='react' size={iconDimension} color={iconColor}/>
           <MaterialCommunityIcons
             name='language-javascript'
             size={iconDimension}
@@ -106,14 +111,15 @@ const experiences = {
       id: '1',
       name: 'W*********',
       role: 'Full-stack Web Engineer',
+      image: 'https://picsum.photos/320/320?random=5',
       startYear: '2017',
       endYear: '2018',
       description:
         'I worked as a software engineer at W*********. I was in close relationship with Design Team and I had been responsible for developing mobile applications for iOS and Android.',
-      shortDescription: 'Remote Work Social Platform',
+      title: 'Remote Work Social Platform',
       technologies: (
         <>
-          <MaterialCommunityIcons name='bootstrap' size={iconDimension} color={iconColor} />
+          <MaterialCommunityIcons name='bootstrap' size={iconDimension} color={iconColor}/>
           <MaterialCommunityIcons
             name='language-javascript'
             size={iconDimension}
@@ -142,12 +148,12 @@ export default function Page() {
               Tech news
             </H6>
           }
-          ListFooterComponent={<YStack height={'$12'} />}
+          ListFooterComponent={<YStack height={'$12'}/>}
           contentContainerStyle={styles}
           data={experiences.projects}
-          renderItem={({ item }) => <Project project={item} />}
+          renderItem={({item}) => <Card item={item}/>}
           keyExtractor={(item) => item.id}
-          ItemSeparatorComponent={<XStack mt={'$4'} />}
+          ItemSeparatorComponent={<XStack mt={'$4'}/>}
         />
       )}
     </CoverPage>

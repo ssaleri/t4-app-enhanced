@@ -5,10 +5,8 @@ import { z } from 'zod'
 
 export const blogPostsRouter = router({
   all: publicProcedure.query(async ({ ctx }) => {
-    const { db } = ctx
-    console.log({db})
-    const allBlogPosts = await db.select().from(BlogPostTable).all()
-    console.log({allBlogPosts})
+    const { db } = ctx;
+    const allBlogPosts = await db.select().from(BlogPostTable).all();
     return allBlogPosts
   }),
   byId: publicProcedure

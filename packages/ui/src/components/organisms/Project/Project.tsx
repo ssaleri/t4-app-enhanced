@@ -30,7 +30,7 @@ const Project = ({ project }: { project: Object }) => {
           height={projectImageDimension}
           alt='Project Logo'
         />
-        <YStack flex={1} flexWrap={'no-wrap'} px={'$2'}>
+        <YStack flex={1} px={'$2'}>
           <Paragraph fontWeight={'600'}>
             {`#${project?.id}`} - {`${project?.shortDescription}`}
           </Paragraph>

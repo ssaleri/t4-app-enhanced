@@ -14,7 +14,6 @@ const { useParam } = createParam<{ id: string }>()
 export const ProjectScreen = ({ project }): React.ReactNode => {
   const [id] = useParam('id')
   const router = useRouter()
-  const windowWidth = Dimensions.get('window').width
 
   return (
     <ScrollView

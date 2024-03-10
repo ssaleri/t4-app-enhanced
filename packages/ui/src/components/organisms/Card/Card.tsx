@@ -38,16 +38,20 @@ const Card = ({ item }: { item: BlogPost }) => {
       >
         <TamaguiCard.Header padded>
           <H2 color={theme.gray12.val}>{item?.title}</H2>
-          <IconLabel
-            icon={<Ionicons size={16} name={'person-circle'} />}
-            label={item?.author}
-            color={theme.gray12.val}
-          />
-          <IconLabel
-            icon={<Ionicons size={16} name={'calendar-outline'} />}
-            label={item?.date}
-            color={theme.gray12.val}
-          />
+          {item?.author && (
+            <IconLabel
+              icon={<Ionicons size={16} name={'person-circle'} />}
+              label={item?.author}
+              color={theme.gray12.val}
+            />
+          )}
+          {item?.date && (
+            <IconLabel
+              icon={<Ionicons size={16} name={'calendar-outline'} />}
+              label={item?.date}
+              color={theme.gray12.val}
+            />
+          )}
         </TamaguiCard.Header>
         <TamaguiCard.Background backgroundColor={theme.color6.val} borderRadius='$6'>
           <SolitoImage src={item?.image} fill alt='Project Logo' resizeMode={'cover'} />

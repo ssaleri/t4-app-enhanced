@@ -129,7 +129,7 @@ const stylesWithParams = ({ insets, oneThirdHeight, headerHeight, translation, t
       height: oneThirdHeight - insets?.top - borderRadius,
     },
     container: {
-      backgroundColor: theme?.color3?.val,
+      backgroundColor: theme?.background?.val,
       paddingHorizontal: 16,
       paddingTop: 16,
       paddingBottom: 200,
