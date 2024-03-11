@@ -12,7 +12,7 @@ export default function Page() {
     <CoverPage title={'Protected'} colorFrom={'$purple8'} colorTo={'$color3'}>
       {(onScroll, styles) => (
         <ScrollView onScroll={onScroll} scrollEventThrottle={16} contentContainerStyle={styles}>
-          <DataFetchingScreen />
+          {/*<DataFetchingScreen />*/}
 
           <Button
             onPress={() => {

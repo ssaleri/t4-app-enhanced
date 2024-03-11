@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActivityIndicator } from 'react-native'
+import { ActivityIndicator, ScrollView } from 'react-native'
 import { CoverPage } from '@t4/ui/src/components/templates/CoverPage/CoverPage'
 import { Paragraph, VirtualList } from '@t4/ui'
 import { trpc } from 'app/utils/trpc'
@@ -20,8 +20,7 @@ export default function Screen() {
       .with(loading, () => <ActivityIndicator animating/>)
       .with(empty, () => <Paragraph>No blog posts found.</Paragraph>)
       .with(success, () => (
-        <List onScroll={onScroll} styles={styles} data={blogPostList?.data} title="Tech news"
-              ListEmptyComponent={blogPostListLayout}/>
+        <List onScroll={onScroll} styles={styles} data={blogPostList?.data} title="Tech news"/>
       ))
       .otherwise(() => <GenericError message={JSON.stringify(blogPostList?.failureReason)}/>)
 

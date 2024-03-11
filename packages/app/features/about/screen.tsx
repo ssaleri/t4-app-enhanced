@@ -1,27 +1,36 @@
-import { Avatar, Circle, Paragraph, Separator, Square, Text, View, XStack, YStack } from '@t4/ui'
+import { Avatar, Circle, Image, Paragraph, Separator, Square, Text, XStack, YStack } from '@t4/ui'
 import React from 'react'
-import Ionicons from '@expo/vector-icons/Ionicons'
 import { useTheme } from "tamagui";
 import Section from "@t4/ui/src/components/organisms/Section/Section";
-import { Dimensions } from "react-native";
+import { ActivityIndicator, Dimensions, Platform } from "react-native";
 import { getTokenValue } from "@tamagui/core"
+import { MapPin } from "@tamagui/lucide-icons";
+import { SvgUri } from 'react-native-svg';
 
 const profile = {
   "info": {
-    "imageSrc": "https://images.unsplash.com/photo-1548142813-c348350df52b?&w=150&h=150&dpr=2&q=80",
+    "imageSrc": "https://glylbhlvgzugwhjyenea.supabase.co/storage/v1/object/public/simonesaleri.dev/simone-saleri-cv-pic.JPG",
     "fullName": "Simone Saleri",
     "job": "Software developer",
     "location": "Milan, Italy",
-    "shortDescription": "👋Hello! I'm a software engineer, passionate about crafting beautiful and functional apps."
+    "shortDescription": "👋 Hello! I'm a software engineer, passionate about crafting beautiful and functional apps."
   },
   "skills": [
-    {name: "React Native", icon: "logo-react"},
-    {name: "React", icon: "logo-react"},
-    {name: "Next.js", icon: "logo-next"},
-    {name: "Typescript", icon: "ts-icon"},
-    {name: "Javascript", icon: "logo-javascript"},
-    {name: "Git", icon: "git-icon"},
-    {name: "Ruby on Rails", icon: "git-icon"},
+    {name: "React Native", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"},
+    {name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg"},
+    {name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg"},
+    {
+      name: "Typescript",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg"
+    },
+    {
+      name: "Javascript",
+      icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg"
+    },
+    {name: "Ruby on Rails", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/rails/rails-plain.svg"},
+    {name: "GraphQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/graphql/graphql-plain.svg"},
+    {name: "tRPC", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/trpc/trpc-original.svg"},
+    {name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg"},
   ],
   "experiences": [
     {
@@ -106,11 +115,24 @@ const Skill = ({name, icon}: { name: string, icon: string }) => {
   const windowWidth = Dimensions.get('window').width
   const cardWidth = (windowWidth / 3) - getTokenValue("$8");
   const color = theme.color12.val;
-console.log(color)
+
   return (
     <Square size={cardWidth} backgroundColor="$color6" elevation="$2" borderRadius={"$4"}>
       <YStack alignItems={"center"}>
-        <Ionicons name={icon} size={40} color={color} />
+        {Platform.OS === "web" ? (
+          <Image
+            resizeMode={"contain"}
+            src={icon}
+            width={40}
+            height={40}
+          />
+          ) : (
+          <SvgUri
+            uri={icon}
+            width={40}
+            height={40}
+          />
+        )}
         <Paragraph color={color}>
           {name}
         </Paragraph>
@@ -119,23 +141,25 @@ console.log(color)
   )
 }
 
-const circleRadius = 4;
-const halfCircleRadius = circleRadius / 2;
+const circleRadius = 2;
 const Experience = (experience: any) => (
   <XStack>
-    <YStack paddingTop={"$2"} paddingHorizontal={"$6"}>
-      <Circle marginLeft={-halfCircleRadius} marginBottom={circleRadius} size={circleRadius} backgroundColor="$color"/>
+    <YStack paddingLeft={"$6"} paddingRight={"$8"} paddingBottom={circleRadius * 2} paddingTop={circleRadius * 4}>
+      <Circle marginLeft={-circleRadius * 2} marginBottom={circleRadius * 4} size={circleRadius * 4}
+              backgroundColor="$color"/>
       <Separator alignSelf="stretch" vertical borderColor={"$gray8"} borderWidth={1}/>
     </YStack>
-    <YStack paddingBottom={"$9"} flex={1} gap={"$1"}>
+    <YStack paddingBottom={"$6"} flex={1} gap={"$1"}>
       {experience?.where && (<Text fontSize={"$6"} fontWeight={600}>
         {experience.where}
       </Text>)}
 
-      {experience?.location && <Text fontSize={"$4"} color={"$gray11"} paddingTop={"$1"} paddingBottom={"$3"}>
-        <Ionicons name={"location-outline"}
-                  size={16}/>{experience.location}
-      </Text>}
+      {experience?.location && (
+        <Text fontSize={"$4"} color={"$gray10"} paddingTop={"$1"} paddingBottom={"$3"}>
+          <MapPin size={16} color={"$gray10"}/>{experience.location}
+        </Text>
+        )
+       }
 
       {experience?.what && <Text fontSize={"$4"} fontWeight={600} fontFamily={""}>
         {experience?.what}
@@ -156,22 +180,24 @@ const Experience = (experience: any) => (
 export function AboutScreen() {
   const theme = useTheme();
 
+  //const Icon = dynamic(() => import('@expo/vector-icons/Ionicons'), {ssr: false});
+
   return (
     <>
       <YStack space={'$4'} paddingTop={"$4"} paddingBottom={200}>
         <YStack marginTop={-64} marginBottom={"$4"} alignItems={"center"}>
           <Avatar circular size={"$13"} style={{borderWidth: 4, borderColor: theme.background.val}}>
-            <Avatar.Image
-              accessibilityLabel="Cam"
-              src={profile?.info?.imageSrc}
-            />
-            <Avatar.Fallback backgroundColor="$blue10"/>
+            <Avatar.Image width="100%" height="100%" src={profile?.info?.imageSrc} />
+            <Avatar.Fallback backgroundColor="$gray6" justifyContent={"center"} alignItems={"center"}>
+              <ActivityIndicator animating/>
+            </Avatar.Fallback>
           </Avatar>
           <YStack marginTop={"$4"} alignItems={"center"} space={"$2"}>
             <Paragraph fontSize={"$8"} fontWeight={700}>{profile?.info?.fullName}</Paragraph>
             <Paragraph fontSize={"$5"}>{profile?.info?.job}</Paragraph>
             <Paragraph fontSize={"$5"} color={"$gray10"}>
-              <Ionicons name={"location-outline"} size={16}/>
+              {/*<Ionicons name={"location-outline"} size={16}/>*/}
+              <MapPin size={16} color={"$gray10"}/>
               {profile?.info?.location}
             </Paragraph>
           </YStack>
@@ -188,7 +214,8 @@ export function AboutScreen() {
         <Section>
           <Section.Title paddingVertical={"$6"}>Work Experience</Section.Title>
           <Section.Body>
-            {profile.experiences.map(experience => (<Experience key={experience.what} {...experience}/>))}</Section.Body>
+            {profile.experiences.map(experience => (
+              <Experience key={experience.where} {...experience}/>))}</Section.Body>
         </Section>
 
         <Section>
