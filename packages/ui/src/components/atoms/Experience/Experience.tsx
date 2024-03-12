@@ -5,31 +5,46 @@ import React from "react";
 const circleRadius = 2;
 export const Experience = (experience: any) => (
   <XStack>
-    <YStack paddingLeft={"$6"} paddingRight={"$8"} paddingBottom={circleRadius * 2} paddingTop={circleRadius * 4}>
+    <YStack
+      paddingLeft={"$2"}
+      paddingRight={"$4"}
+      paddingBottom={circleRadius * 2}
+      paddingTop={circleRadius * 4}
+      $gtSm={{
+        paddingRight: "$10"
+      }}
+
+    >
       <Circle marginLeft={-circleRadius * 2} marginBottom={circleRadius * 4} size={circleRadius * 4}
               backgroundColor="$color"/>
       <Separator alignSelf="stretch" vertical borderColor={"$gray8"} borderWidth={1}/>
     </YStack>
-    <YStack paddingBottom={"$6"} flex={1} gap={"$1"}>
-      {experience?.where && (<Text fontSize={"$6"} fontWeight={600}>
+    <YStack
+      paddingBottom={"$6"}
+      flex={1}
+      gap={"$1"}
+      $gtSm={{
+        paddingBottom: "$10"
+      }}>
+      {experience?.where && (<Paragraph fontSize={"$5"} fontWeight={600}>
         {experience.where}
-      </Text>)}
+      </Paragraph>)}
 
       {experience?.location && (
         <XStack alignItems={"center"} marginTop={"$1"} marginBottom={"$3"} space={"$1"}>
-          <MapPin size={16} color={"$gray10"}/>
-          <Text fontSize={"$4"} color={"$gray10"}>{experience.location}</Text>
+          <MapPin size={14} color={"$gray10"}/>
+          <Paragraph fontSize={"$3"} color={"$gray10"}>{experience.location}</Paragraph>
         </XStack>
       )
       }
 
-      {experience?.what && <Text fontSize={"$4"} fontWeight={600} fontFamily={""}>
-        {experience?.what}
-      </Text>}
+      {experience?.what && <Paragraph fontSize={"$2"} fontWeight={600} letterSpacing={1}>
+        {experience?.what?.toUpperCase()}
+      </Paragraph>}
 
-      {experience?.shortDescription && <Text fontSize={"$4"}>
+      {experience?.shortDescription && <Paragraph fontSize={"$4"}>
         {experience?.shortDescription}
-      </Text>}
+      </Paragraph>}
 
 
       {experience?.fromDate && (experience?.toDate || experience?.isOngoing) && <Paragraph>

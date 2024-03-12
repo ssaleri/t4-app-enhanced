@@ -54,8 +54,8 @@ const profile = {
     },
     {
       what: "Mobile Developer (React Native)",
-      where: "SaveBiking",
-      location: "Remote (Milan, Italy)",
+      where: "Reiser (SaveBiking)",
+      location: "Remote (Lainate, Milan, Italy)",
       fromDate: "2020",
       toDate: "2021",
       isOngoing: false,
@@ -63,8 +63,8 @@ const profile = {
     },
     {
       what: "Full Stack Developer (Ruby on Rails)",
-      where: "WhiteLibra",
-      location: "Remote (Milan, Italy)",
+      where: "Reiser (WhiteLibra)",
+      location: "Remote (Lainate, Milan, Italy)",
       fromDate: "2018",
       toDate: "2019",
       isOngoing: false,

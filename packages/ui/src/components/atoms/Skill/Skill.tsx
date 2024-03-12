@@ -10,7 +10,6 @@ export const Skill = ({name, icon}: { name: string, icon: string }) => {
   const theme = useTheme();
   const windowWidth = Dimensions.get('window').width
   const cardWidth = isWeb ? (100) : ((windowWidth / 3) - getTokenValue("$8"));
-  const color = theme.color12.val;
 
   return (
     <Square size={cardWidth} backgroundColor="$color6" elevation="$2" borderRadius={"$4"}>
@@ -29,7 +28,7 @@ export const Skill = ({name, icon}: { name: string, icon: string }) => {
             height={40}
           />
         )}
-        <Paragraph color={color}>
+        <Paragraph color={"$color12"}>
           {name}
         </Paragraph>
       </YStack>
