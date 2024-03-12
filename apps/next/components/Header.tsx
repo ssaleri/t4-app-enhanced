@@ -35,7 +35,7 @@ export function Header() {
 
   return (
     <>
-      <XStack ai={'center'} jc='space-between' p={'$2'}>
+      <XStack ai={'center'} jc='space-between' p={'$2'} position={"fixed"} zIndex={999} width={"100%"} backgroundColor={"$background"}>
         <SolitoImage src='/brand-logo-icon.svg' width={32} height={32} alt='Website Logo' />
 
         <XStack jc='space-between' ai='center' space='$2'>

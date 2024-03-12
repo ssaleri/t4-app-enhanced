@@ -1,69 +1,23 @@
-import { Animated, Dimensions, StyleSheet, View } from 'react-native'
-import React, { useEffect, useRef, useState } from 'react'
+import { Animated, Dimensions, Platform, StyleSheet, View } from 'react-native'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
-import { H3, useTheme, ZStack } from 'tamagui'
+import { useTheme } from 'tamagui'
 import { useHeaderHeight } from '@react-navigation/elements'
-import { H1 } from '@t4/ui'
-import { LinearGradient } from 'tamagui/linear-gradient'
-import { SolitoImage } from 'solito/image'
 import { CoverPageType } from 'app/models/CoverPage'
+import { Cover } from "../../organisms/Cover/Cover";
+import React, { useEffect, useRef, useState } from 'react'
+import { Title } from "../../atoms/typography/Title/Title";
+import { isWeb } from "app/utils/device";
 
-const renderCover = ({
-  colorFrom,
-  colorTo,
-  imageSrc,
-  insets,
-  windowWidth,
-  windowHeight,
-  theme,
-}) => {
-  return (
-    <>
-      {!!colorFrom && !!colorTo && !!windowWidth && !!windowHeight && (
-        <LinearGradient
-          width={windowWidth}
-          height={windowHeight}
-          colors={[colorFrom, colorTo]}
-          start={[0, 0]}
-          end={[0, 1]}
-        />
-      )}
-      {!!imageSrc && !!insets && (
-        <ZStack>
-          <SolitoImage
-            src={imageSrc}
-            height={400}
-            alt='Project Logo'
-            resizeMode={'cover'}
-            style={stylesWithParams(insets).headerImage}
-          />
-          <LinearGradient
-            width={windowWidth}
-            height={windowHeight}
-            colors={[theme.color6.val, theme.backgroundTransparent.val]}
-            start={[0, 0]}
-            end={[0, 1]}
-            locations={[0, 0.25]}
-          />
-        </ZStack>
-      )}
-    </>
-  )
-}
-
-const renderTitle = (title: string) =>
-  title?.length > 15 ? <H3 color={'white'}>{title}</H3> : <H1 color={'white'}>{title}</H1>
-
-export const CoverPage = ({ title, children, colorFrom, colorTo, imageSrc }: CoverPageType) => {
+export const CoverPage = ({title, children, colorFrom, imageSrc}: CoverPageType) => {
   const insets = useSafeAreaInsets()
   const windowHeight = Dimensions.get('window').height
-  const windowWidth = Dimensions.get('window').width
-  const oneThirdHeight = windowHeight / 4
+  const oneFourthHeight = windowHeight / 4
   const theme = useTheme()
+  const isWeb = Platform.OS == "web";
 
   const [headerShown, setHeaderShown] = useState(false)
   const translation = useRef(new Animated.Value(-100)).current
-  const headerHeight = useHeaderHeight() || insets?.top || 0
+  const headerHeight = (isWeb ? 0 : (useHeaderHeight() || insets?.top || 0));
 
   const onScroll = (event) => {
     const scrolling = event.nativeEvent.contentOffset.y
@@ -82,25 +36,27 @@ export const CoverPage = ({ title, children, colorFrom, colorTo, imageSrc }: Cov
     }).start()
   }, [headerShown])
 
-  const params = { insets, oneThirdHeight, headerHeight, translation, theme }
+  const params = {insets, oneFourthHeight, headerHeight, translation, theme}
 
   return (
     <>
-      <Animated.View style={stylesWithParams(params).animatedHeader} />
+      <Animated.View style={stylesWithParams(params).animatedHeader}/>
 
       <View style={styles.headerSection}>
-        {renderCover({ colorFrom, colorTo, imageSrc, insets, windowWidth, windowHeight, theme })}
+        <Cover colorFrom={colorFrom} imageSrc={imageSrc}/>
 
-        <View style={stylesWithParams(params).headerTitle}>{renderTitle(title)}</View>
+        <View style={stylesWithParams(params).headerTitle}>
+          <Title>{title}</Title>
+        </View>
       </View>
 
-      {children(onScroll, stylesWithParams(params).container)}
+      {isWeb ? children() : children(onScroll, stylesWithParams(params).container)}
     </>
   )
 }
 
 const borderRadius = 16
-const stylesWithParams = ({ insets, oneThirdHeight, headerHeight, translation, theme }) =>
+const stylesWithParams = ({insets, oneFourthHeight, headerHeight, translation, theme}) =>
   StyleSheet.create({
     animatedHeader: {
       position: 'absolute',
@@ -117,23 +73,20 @@ const stylesWithParams = ({ insets, oneThirdHeight, headerHeight, translation, t
         outputRange: [0, 1],
       }),
     },
-    headerImage: {
-      marginBottom: insets?.top,
-    },
     headerTitle: {
       alignItems: 'center',
       justifyContent: 'center',
       position: 'absolute',
-      top: insets?.top,
+      top: isWeb ? 50 : (insets?.top || 16),
       width: '100%',
-      height: oneThirdHeight - insets?.top - borderRadius,
+      height: oneFourthHeight - insets?.top - borderRadius,
     },
     container: {
       backgroundColor: theme?.background?.val,
       paddingHorizontal: 16,
       paddingTop: 16,
       paddingBottom: 200,
-      marginTop: oneThirdHeight - borderRadius,
+      marginTop: oneFourthHeight - borderRadius,
       borderTopLeftRadius: borderRadius,
       borderTopRightRadius: borderRadius,
       minHeight: '100%',

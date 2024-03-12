@@ -1,11 +1,12 @@
-import { Avatar, Circle, Image, Paragraph, Separator, Square, Text, XStack, YStack } from '@t4/ui'
+import { Avatar, Paragraph, XStack, YStack } from '@t4/ui'
 import React from 'react'
 import { useTheme } from "tamagui";
 import Section from "@t4/ui/src/components/organisms/Section/Section";
-import { ActivityIndicator, Dimensions, Platform } from "react-native";
-import { getTokenValue } from "@tamagui/core"
+import { ActivityIndicator, Platform } from "react-native";
 import { MapPin } from "@tamagui/lucide-icons";
-import { SvgUri } from 'react-native-svg';
+import { Experience } from "@t4/ui/src/components/atoms/Experience/Experience";
+import { Skill } from "@t4/ui/src/components/atoms/Skill/Skill";
+import { Text } from "@t4/ui/src";
 
 const profile = {
   "info": {
@@ -110,81 +111,14 @@ const profile = {
   ],
 };
 
-const Skill = ({name, icon}: { name: string, icon: string }) => {
-  const theme = useTheme();
-  const windowWidth = Dimensions.get('window').width
-  const cardWidth = (windowWidth / 3) - getTokenValue("$8");
-  const color = theme.color12.val;
-
-  return (
-    <Square size={cardWidth} backgroundColor="$color6" elevation="$2" borderRadius={"$4"}>
-      <YStack alignItems={"center"}>
-        {Platform.OS === "web" ? (
-          <Image
-            resizeMode={"contain"}
-            src={icon}
-            width={40}
-            height={40}
-          />
-          ) : (
-          <SvgUri
-            uri={icon}
-            width={40}
-            height={40}
-          />
-        )}
-        <Paragraph color={color}>
-          {name}
-        </Paragraph>
-      </YStack>
-    </Square>
-  )
-}
-
-const circleRadius = 2;
-const Experience = (experience: any) => (
-  <XStack>
-    <YStack paddingLeft={"$6"} paddingRight={"$8"} paddingBottom={circleRadius * 2} paddingTop={circleRadius * 4}>
-      <Circle marginLeft={-circleRadius * 2} marginBottom={circleRadius * 4} size={circleRadius * 4}
-              backgroundColor="$color"/>
-      <Separator alignSelf="stretch" vertical borderColor={"$gray8"} borderWidth={1}/>
-    </YStack>
-    <YStack paddingBottom={"$6"} flex={1} gap={"$1"}>
-      {experience?.where && (<Text fontSize={"$6"} fontWeight={600}>
-        {experience.where}
-      </Text>)}
-
-      {experience?.location && (
-        <Text fontSize={"$4"} color={"$gray10"} paddingTop={"$1"} paddingBottom={"$3"}>
-          <MapPin size={16} color={"$gray10"}/>{experience.location}
-        </Text>
-        )
-       }
-
-      {experience?.what && <Text fontSize={"$4"} fontWeight={600} fontFamily={""}>
-        {experience?.what}
-      </Text>}
-
-      {experience?.shortDescription && <Text fontSize={"$4"}>
-        {experience?.shortDescription}
-      </Text>}
-
-
-      {experience?.fromDate && (experience?.toDate || experience?.isOngoing) && <Paragraph>
-        {experience.fromDate} - {experience?.isOngoing ? " Present" : experience.toDate}
-      </Paragraph>}
-    </YStack>
-  </XStack>
-)
-
 export function AboutScreen() {
   const theme = useTheme();
-
-  //const Icon = dynamic(() => import('@expo/vector-icons/Ionicons'), {ssr: false});
+  const isWeb = Platform.OS === "web";
+  const isMobileApp = !isWeb;
 
   return (
     <>
-      <YStack space={'$4'} paddingTop={"$4"} paddingBottom={200}>
+      <YStack space={'$4'} paddingTop={isMobileApp && "$4"} paddingBottom={200} maxWidth={1200} marginHorizontal={"auto"}>
         <YStack marginTop={-64} marginBottom={"$4"} alignItems={"center"}>
           <Avatar circular size={"$13"} style={{borderWidth: 4, borderColor: theme.background.val}}>
             <Avatar.Image width="100%" height="100%" src={profile?.info?.imageSrc} />
@@ -195,11 +129,13 @@ export function AboutScreen() {
           <YStack marginTop={"$4"} alignItems={"center"} space={"$2"}>
             <Paragraph fontSize={"$8"} fontWeight={700}>{profile?.info?.fullName}</Paragraph>
             <Paragraph fontSize={"$5"}>{profile?.info?.job}</Paragraph>
-            <Paragraph fontSize={"$5"} color={"$gray10"}>
-              {/*<Ionicons name={"location-outline"} size={16}/>*/}
+
+            <XStack alignItems={"center"} marginTop={"$1"} marginBottom={"$3"} space={"$1"}>
               <MapPin size={16} color={"$gray10"}/>
-              {profile?.info?.location}
-            </Paragraph>
+              <Paragraph fontSize={"$5"} color={"$gray10"} alignItems={"flex-end"}>
+                {profile?.info?.location}
+              </Paragraph>
+            </XStack>
           </YStack>
         </YStack>
         <Paragraph fontSize={"$5"}>{profile?.info?.shortDescription}</Paragraph>
