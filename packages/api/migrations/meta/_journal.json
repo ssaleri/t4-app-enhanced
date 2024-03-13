@@ -5,43 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1692862097376,
-      "tag": "0000_chemical_spitfire",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1694824497981,
-      "tag": "0001_worried_gamma_corps",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1699066590780,
-      "tag": "0002_faithful_gravity",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1699079033736,
-      "tag": "0003_hot_ultragirl",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1708882408611,
-      "tag": "0004_abandoned_loki",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "5",
-      "when": 1709829917520,
-      "tag": "0005_cool_mikhail_rasputin",
+      "when": 1710343834782,
+      "tag": "0000_friendly_namor",
       "breakpoints": true
     }
   ]
