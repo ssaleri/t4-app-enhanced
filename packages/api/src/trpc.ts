@@ -15,6 +15,7 @@ const t = initTRPC.context<Context>().create({
  */
 const isAuthed = t.middleware(({ next, ctx }) => {
   if (ctx.user === null) {
+    console.log("This is the context: ", ctx)
     throw new TRPCError({ code: 'UNAUTHORIZED', message: 'Not authenticated' })
   }
   return next({

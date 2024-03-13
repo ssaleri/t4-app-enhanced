@@ -13,7 +13,7 @@ const iconDimension = 24
 const iconDimensionBig = 32
 const iconDimensionLittle = 16
 
-const experiences = {
+export const experiences = {
   projects: [
     {
       id: '5',
@@ -27,13 +27,13 @@ const experiences = {
         'I worked as a software engineer at B*******. I was responsible for developing mobile applications for iOS and WatchOS.',
       technologies: (
         <>
-          <MaterialCommunityIcons name='react' size={iconDimension} color={iconColor}/>
+          {/*<MaterialCommunityIcons name='react' size={iconDimension} color={iconColor}/>
           <MaterialCommunityIcons
             name={'language-typescript'}
             size={iconDimension}
             color={iconColor}
           />
-          <MaterialCommunityIcons name='language-swift' size={iconDimension} color={iconColor}/>
+          <MaterialCommunityIcons name='language-swift' size={iconDimension} color={iconColor}/>*/}
         </>
       ),
     },
@@ -49,13 +49,13 @@ const experiences = {
         'I worked as a software engineer at S*********. I was responsible for developing mobile applications for iOS and WatchOS.',
       technologies: (
         <>
-          <MaterialCommunityIcons name='react' size={iconDimension} color={iconColor}/>
+          {/*<MaterialCommunityIcons name='react' size={iconDimension} color={iconColor}/>
           <MaterialCommunityIcons
             name={'language-typescript'}
             size={iconDimension}
             color={iconColor}
           />
-          <MaterialCommunityIcons name='android' size={iconDimension} color={iconColor}/>
+          <MaterialCommunityIcons name='android' size={iconDimension} color={iconColor}/>*/}
         </>
       ),
     },
@@ -71,13 +71,13 @@ const experiences = {
         'I worked as a software engineer at D**********. I was in close relationship with Design Team and I had been responsible for developing mobile applications for iOS and Android.',
       technologies: (
         <>
-          <MaterialCommunityIcons name='react' size={iconDimension} color={iconColor}/>
+          {/*<MaterialCommunityIcons name='react' size={iconDimension} color={iconColor}/>
           <MaterialCommunityIcons
             name={'language-typescript'}
             size={iconDimension}
             color={iconColor}
-          />
-          <Fontisto name='redux' size={iconDimensionLittle} color={iconColor}/>
+          />*/}
+          {/*<Fontisto name='redux' size={iconDimensionLittle} color={iconColor}/>*/}
         </>
       ),
     },
@@ -93,7 +93,7 @@ const experiences = {
       title: 'Micro-mobility Gamification',
       technologies: (
         <>
-          <MaterialCommunityIcons name='react' size={iconDimension} color={iconColor}/>
+          {/*<MaterialCommunityIcons name='react' size={iconDimension} color={iconColor}/>
           <MaterialCommunityIcons
             name='language-javascript'
             size={iconDimension}
@@ -103,7 +103,7 @@ const experiences = {
             name='language-ruby-on-rails'
             size={iconDimension}
             color={iconColor}
-          />
+          />*/}
         </>
       ),
     },
@@ -119,7 +119,7 @@ const experiences = {
       title: 'Remote Work Social Platform',
       technologies: (
         <>
-          <MaterialCommunityIcons name='bootstrap' size={iconDimension} color={iconColor}/>
+          {/*<MaterialCommunityIcons name='bootstrap' size={iconDimension} color={iconColor}/>
           <MaterialCommunityIcons
             name='language-javascript'
             size={iconDimension}
@@ -129,7 +129,7 @@ const experiences = {
             name='language-ruby-on-rails'
             size={iconDimension}
             color={iconColor}
-          />
+          />*/}
         </>
       ),
     },

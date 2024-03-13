@@ -5,17 +5,24 @@ import { Linking } from 'react-native'
 import { ThemeToggle } from '@t4/ui/src/ThemeToggle'
 import { SolitoImage } from 'solito/image'
 import { useLink } from 'solito/link'
+import Link from "next/link";
+import { useSheetOpen } from "app/atoms/sheet";
+import { Sheet } from "@t4/ui/src";
+import { ChevronDown } from "@tamagui/lucide-icons";
+import { SendMessageScreen } from "app/features/sendMessage/screen";
+import { useState } from "react";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = React.useState(false)
+  const [open, setOpen] = useSheetOpen()
+  const [position, setPosition] = useState(0)
 
-  const portfolioLink = useLink({
-    href: '/portfolio',
+  const homeLink = useLink({
+    href: '/',
   })
 
   const links = [
-    { label: 'Home', href: '/', props: useLink({ href: '/' }) },
-    { label: 'Blog', href: '/', props: useLink({ href: '/blog' }) },
+      { label: 'Blog', href: '/', props: useLink({ href: '/blog' }) },
     { label: 'About', href: '/about', props: useLink({ href: '/about' }) },
     { label: 'Portfolio', href: '/portfolio', props: useLink({ href: '/portfolio' }) },
     { label: 'Contact', href: '/contact', props: useLink({ href: '/contact' }) },
@@ -36,11 +43,13 @@ export function Header() {
   return (
     <>
       <XStack ai={'center'} jc='space-between' p={'$2'} position={"fixed"} zIndex={999} width={"100%"} backgroundColor={"$background"}>
-        <SolitoImage src='/brand-logo-icon.svg' width={32} height={32} alt='Website Logo' />
+        <Link href="/" >
+          <SolitoImage {...homeLink} src='/brand-logo-icon.svg' width={32} height={32} alt='Website Logo' />
+        </Link>
 
         <XStack jc='space-between' ai='center' space='$2'>
           {links.map((link) => (
-            <Button {...link.props}>{link.label}</Button>
+            <Button key={link.label}{...link.props}>{link.label}</Button>
           ))}
           <Button
             space={'$2'}
@@ -52,6 +61,36 @@ export function Header() {
         </XStack>
 
         <ThemeToggle />
+
+        <Button onPress={() => setOpen((x) => !x)} space='$2'>
+          Bottom Sheet
+        </Button>
+        <Sheet
+          modal
+          open={open}
+          onOpenChange={setOpen}
+          snapPoints={[90]}
+          position={position}
+          onPositionChange={setPosition}
+          dismissOnSnapToBottom
+          disableDrag
+        >
+          <Sheet.Overlay />
+          <Sheet.Frame alignItems='center' justifyContent='flex-start'>
+            <Sheet.Handle />
+            <Button
+              transparent={true}
+              size='$4'
+              circular
+              icon={ChevronDown}
+              onPress={() => {
+                setOpen(false)
+              }}
+            />
+            <SendMessageScreen />
+          </Sheet.Frame>
+        </Sheet>
+
       </XStack>
     </>
   )

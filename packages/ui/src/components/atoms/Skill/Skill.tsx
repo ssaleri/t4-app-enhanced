@@ -1,7 +1,7 @@
 import { useTheme } from "tamagui";
-import { Dimensions, Platform } from "react-native";
+import { Dimensions } from "react-native";
 import { getTokenValue } from "@tamagui/core";
-import { Image, Paragraph, Square, YStack } from "../../../index";
+import { Image, Paragraph, Square, YStack } from "@t4/ui";
 import { SvgUri } from "react-native-svg";
 import React from "react";
 import { isWeb } from "app/utils/device";

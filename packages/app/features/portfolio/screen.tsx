@@ -1,27 +1,27 @@
-import { useWindowDimensions, YStack, useMedia } from '@t4/ui'
 import React from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
-import Section from '@t4/ui/src/components/organisms/Section/Section'
-import Project from '@t4/ui/src/components/organisms/Project/Project'
-import { XStack, ScrollView, Text } from '@t4/ui/'
-import Fontisto from 'react-native-vector-icons/Fontisto'
-import FontAwesome from '@expo/vector-icons/FontAwesome'
-import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
-import Ionicons from '@expo/vector-icons/Ionicons'
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
-import { Paragraph } from 'tamagui'
-import { CoverList } from '@t4/ui/src/components/templates/CoverList/CoverList'
+import { FlatList } from "react-native";
+import { experiences } from "expo-app/app/(tabs)/Portfolio/Portfolio";
+import { XStack } from "@t4/ui";
+import { H6, YStack } from "tamagui";
+import Card from "@t4/ui/src/components/organisms/Card/Card";
 
-export const PortfolioScreen = () => {
+export const PortfolioScreen = ({onScroll, styles}) => {
   return (
     <>
-      <CoverList
-        title={'Portfolio'}
-        description={'Projects I have been involved in'}
+      <FlatList
+        onScroll={onScroll}
+        scrollEventThrottle={16}
+        ListHeaderComponent={
+          <H6 textAlign={'center'} py={'$6'}>
+            Tech news
+          </H6>
+        }
+        ListFooterComponent={<YStack height={'$12'}/>}
+        contentContainerStyle={styles}
         data={experiences.projects}
-        renderItem={({ item }) => <Project project={item} />}
-        colorFrom={'$green8'}
-        colorTo={'$color3'}
+        renderItem={({item}) => <Card item={item}/>}
+        keyExtractor={(item) => item.id}
+        ItemSeparatorComponent={<XStack mt={'$4'}/>}
       />
     </>
   )

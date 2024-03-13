@@ -8,27 +8,21 @@ import { empty, error, loading, success } from 'app/utils/trpc/patterns'
 import { GenericError } from '@t4/ui/src/components/molecules/GenericError/GenericError'
 import { List } from "@t4/ui/src/components/organisms/List/List";
 import { CarListItem } from "@t4/ui/src/cars/CarListItem";
+import { BlogScreen } from "app/features/blog/screen";
+import Head from "next/head";
+import { AboutScreen } from "app/features/about/screen";
 
 export default function Screen() {
-  const blogPostList = trpc.blogPosts.all.useQuery()
-
-  console.log("BlogPostList: ", blogPostList);
-
-  const blogPostListLayout = (onScroll, styles) =>
-    match(blogPostList)
-      .with(error, () => <GenericError message={JSON.stringify(blogPostList?.failureReason)}/>)
-      .with(loading, () => <ActivityIndicator animating/>)
-      .with(empty, () => <Paragraph>No blog posts found.</Paragraph>)
-      .with(success, () => (
-        <List onScroll={onScroll} styles={styles} data={blogPostList?.data} title="Tech news"/>
-      ))
-      .otherwise(() => <GenericError message={JSON.stringify(blogPostList?.failureReason)}/>)
-
   return (
     <>
+      <Head>
+        <title>Blog</title>
+      </Head>
       <CoverPage title={'Blog'} colorFrom={'$red8'} colorTo={'$color3'}>
         {(onScroll, styles) => (
-          blogPostListLayout(onScroll, styles)
+          <ScrollView onScroll={onScroll} scrollEventThrottle={16} contentContainerStyle={styles}>
+            <BlogScreen />
+          </ScrollView>
         )}
       </CoverPage>
     </>

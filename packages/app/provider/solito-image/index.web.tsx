@@ -8,11 +8,19 @@ export const SolitoImageProvider = ({
   children: React.ReactNode
 }): React.ReactNode => {
   return (
-    <SolitoImageProviderOG
-      loader={({ quality, width, src }) => {
-        return `${imageURL}${src}?w=${width}&q=${quality}`
-      }}
-    >
+      <SolitoImageProviderOG
+        loader={({quality, width, src}) => {
+          if (
+            src.startsWith('http://') ||
+            src.startsWith('https://') ||
+            src.startsWith('//') ||
+            src.startsWith('data:')
+          ) {
+            return src
+          }
+          return `${imageURL}${src}?w=${width}&q=${quality}`
+        }}
+      >
       {children}
     </SolitoImageProviderOG>
   )
